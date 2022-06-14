@@ -1,0 +1,16 @@
+[tool.poetry]
+name = "authen_docker"
+version = "0.1.0"
+description = ""
+authors = ["NestorAlban <albquenes7294@gmail.com>"]
+
+[tool.poetry.dependencies]
+python = "^3.9"
+fastapi = "^0.78.0"
+uvicorn = "^0.17.6"
+
+[tool.poetry.dev-dependencies]
+
+[build-system]
+requires = ["poetry-core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"
