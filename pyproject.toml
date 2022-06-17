@@ -8,6 +8,13 @@ authors = ["NestorAlban <albquenes7294@gmail.com>"]
 python = "^3.9"
 fastapi = "^0.78.0"
 uvicorn = "^0.17.6"
+python-multipart = "^0.0.5"
+SQLAlchemy = "^1.4.37"
+psycopg2 = "^2.9.3"
+python-dotenv = "^0.20.0"
+passlib = "^1.7.4"
+bcrypt = "^3.2.2"
+python-jose = "^3.3.0"
 
 [tool.poetry.dev-dependencies]
 

@@ -1,19 +1,19 @@
-from typing import Union
+import sys
+import os
 
-from fastapi import FastAPI
+sys.path.append(os.getcwd())
 import uvicorn
 
-app = FastAPI()
+from app.endpoints.app import create_app
+from app.models.user import Base
+from app.database.database import DataBase
 
+app = create_app()
+# Crear estructura básica de modelos en base datos
+db = DataBase()
+Base.metadata.create_all(db.engine)
+db.session.close()
 
-@app.get("/")
-def read_root():
-    return {"Hello": "World"}
+if __name__ == "__main__":
+    uvicorn.run("main:app", host="localhost", port=5001, reload=True)
 
-
-@app.get("/items/{item_id}")
-def read_item(item_id: int, q: Union[str, None] = None):
-    return {"item_id": item_id, "q": q}
-
-if __name__ == '__main__':
-    uvicorn.run(app, port=8000, host="0.0.0.0")
