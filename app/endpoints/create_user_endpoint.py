@@ -57,6 +57,7 @@ def create_user(new_user_data: UserInfoBack):
                     updated_at = user.updated_at,
                 ).dict(by_alias=True)
                 success = True
+                print("==============success============")
     except Exception as error:
         logging.error(CREATE_USER_ERROR_MESSAGE, error)
     return {SUCCESS_KEY: success, USER_KEY: user_response}

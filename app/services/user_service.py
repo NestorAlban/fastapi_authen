@@ -20,6 +20,7 @@ class UserService:
             password
         )
         print(user)
+        print("====================asd===========")
         return user
 
     def create_user(
@@ -33,6 +34,7 @@ class UserService:
             email, 
             password
         )
+        print("==============success2============")
         return user
     
     def get_user_id(

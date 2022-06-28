@@ -14,7 +14,7 @@ class LoginUser:
             params.name, 
             params.password
         )
-        print("============================")
+        print("============================1111111")
         print(user)
         d = user.get('user')
         if d != None:
@@ -23,5 +23,5 @@ class LoginUser:
             )
             print(user.get('user'))
             print(login_user_response)
-            print("============================")
+            print("============================111111111111")
         return user
