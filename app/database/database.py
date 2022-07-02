@@ -12,6 +12,7 @@ from fastapi.security import (
 )
 
 import os
+import uuid
 from requests import Session
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
@@ -34,6 +35,8 @@ from passlib.context import CryptContext
 from .hash_pass import Hash_Password
 from .token import Token
 from .oauth import GetCurrentUsers
+from .domain import UserDomaint
+from .mail import Mail
 
 from app.schemas import UserData
 
@@ -57,14 +60,6 @@ class UserDomain:
     created_at: Optional[datetime]
     updated_at: Optional[datetime]
 
-@dataclass(frozen=True)
-class CleanUserDomain:
-    id: int
-    name: str
-    email: str
-    is_active: Optional[bool]
-    created_at: Optional[datetime]
-    updated_at: Optional[datetime]
 
 # pwd_cxt = CryptContext(schemes = ["bcrypt"], deprecated = "auto")
 
@@ -141,13 +136,14 @@ class DataBase:
 
     @staticmethod
     def create_user_domain(user):
-        user_domain = UserDomain(
+        #you can use the UserDomain in this file or UserDomaint in domain.py file in this folder
+        user_domain = UserDomaint(
             user.id, 
             user.name, 
             user.email, 
             user.password,
             user.is_active, 
-            user.created_at, 
+            user.created_at,
             user.updated_at
         )
         return user_domain
@@ -192,7 +188,72 @@ class DataBase:
         self.session.close()
         return user
 
+    def get_all_users(self):
+        users = self.session.query(User).all()
+        for user in users:
+            print(user)
+            if user:
+                user_domain=DataBase.create_user_domain(user)
+                print("=====================get_all_users1=======================")
+                print(user_domain, type(user_domain), user_domain.id)
+                print("=====================get_all_users1=======================")
+        self.session.close()
+        # user_response=[UserDomain(**user.__dict__) for user in users]
+        # print(user_response)
+        return users
 
+    def get_all_active_users(self):
+        users = self.session.query(
+            User
+        ).filter(
+            User.is_active == sa_true()
+        ).all()
+        self.session.close()
+        return users
 
+    def change_user_password(
+        self, 
+        email: str
+    ):
+        user = None
+        code = None
+        print("Email>error data 1")
+        user = self.session.query(
+            User
+        ).filter(
+            User.email == email
+        ).first()
+        print(user)
+        print("Email>error data 2")
+        if user:
+            code = str(uuid.uuid1())
+            user_domain=DataBase.create_user_domain(user)
+            print(user_domain, type(user_domain), user_domain.id)
+        self.session.close()
+
+        #Sending Mail
+
+        subject = "Password"
+        recipient = [user_domain.email]
+        message = """
+        <!DOCTYPE html>
+        <html>
+        <body>
+        <div style="width:100%;font-family: monospace;">
+            <h1>Hello, {0:}</h1>
+            <p>Your reset code is {1:}</p>
+        </div>
+        </body>
+        </html>
+        """.format(user_domain.email, code)
+        print("Email>error data 3")
+        # print(Mail)
+        # send = Mail.send_email(subject, recipient, message)
+        
+        # print(send)
+        return {"user": user, "reset_code": code}
+
+    def change_password():
+        pass
 
 

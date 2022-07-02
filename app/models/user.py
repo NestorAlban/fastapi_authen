@@ -38,6 +38,8 @@ class User(Base):
         default = True, 
         nullable = False
     )
+    # status int, mapear en string (registrado, eliminado, activo)
+    # rol (usuario, gerente, etc)
     created_at = Column(
         DateTime, 
         default = func.now(), 

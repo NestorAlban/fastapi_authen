@@ -43,3 +43,23 @@ class UserService:
     ):
         user = self.alchemy_db.get_user_id(id)
         return user
+
+    def get_all_users(self):
+        users = []
+        users = self.alchemy_db.get_all_users()
+        return users
+
+    def get_all_active_users(self):
+        users = []
+        users = self.alchemy_db.get_all_active_users()
+        return users
+
+    def change_user_password(
+        self, 
+        email: str
+    ):
+        print("Email>error ser 1")
+        user = self.alchemy_db.change_user_password(email)
+        print(user)
+        print("Email>error ser 2")
+        return user

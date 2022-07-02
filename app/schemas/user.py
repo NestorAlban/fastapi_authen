@@ -9,7 +9,8 @@ class UserId(BaseModel):
 class UserIdDefault(BaseModel):
     id: int = Field(default = 1)
 
-
+class UserEmailDefault(BaseModel):
+    email: str = Field(default = "example@email.com")
 
 class UserInfoBack(BaseModel):
     name: str = Field(default = "Example_username")

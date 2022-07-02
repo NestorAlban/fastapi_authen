@@ -1,6 +1,7 @@
 from .user import (
     UserId, 
     UserIdDefault,
+    UserEmailDefault,
     UserInfoBack, 
     UserData,
     UserCleanData
