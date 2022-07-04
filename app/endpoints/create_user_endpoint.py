@@ -9,6 +9,7 @@ from datetime import datetime
 
 from app.usercase.create_user_usercase import UserCreator
 from app.schemas import UserData, UserInfoBack
+from app.database import Mapping_rath
 
 router = APIRouter()
 
@@ -53,10 +54,19 @@ def create_user(new_user_data: UserInfoBack):
                     email = user.email,
                     password = user.password,
                     is_active = user.is_active,
+                    status = user.status,
+                    role = user.role,
                     created_at = user.created_at,
                     updated_at = user.updated_at,
                 ).dict(by_alias=True)
                 success = True
+                print("==============success============")
+                print(
+                    user_response, 
+                    type(user_response),
+                    user_response.get('role'), type(user_response.get('role')), 
+                    Mapping_rath.role_mapping(user_response.get('role'))
+                )
                 print("==============success============")
     except Exception as error:
         logging.error(CREATE_USER_ERROR_MESSAGE, error)

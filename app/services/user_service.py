@@ -63,3 +63,54 @@ class UserService:
         print(user)
         print("Email>error ser 2")
         return user
+        
+    def update_user(
+        self, 
+        id: int, 
+        name: str, 
+        email: str
+    ):
+        users = self.alchemy_db.update_user(
+            id, 
+            name, 
+            email
+        )
+        return users
+
+    def deactivate_user(
+        self, 
+        id: int
+    ):
+        users = self.alchemy_db.deactivate_user(id)
+        return users
+
+    def activate_user(
+        self, 
+        id: int
+    ):
+        users = self.alchemy_db.activate_user(id)
+        return users
+
+    def update_user_role(
+        self, 
+        id: int, 
+        role: int
+    ):
+        users = self.alchemy_db.update_user_role(
+            id, 
+            role,
+        )
+        return users
+
+    def update_user_status(
+        self, 
+        id: int, 
+        status: int
+    ):
+        users = self.alchemy_db.update_user_status(
+            id, 
+            status,
+        )
+        return users
+
+    

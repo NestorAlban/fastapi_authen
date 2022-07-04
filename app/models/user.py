@@ -38,6 +38,16 @@ class User(Base):
         default = True, 
         nullable = False
     )
+    status = Column(
+        Integer(), 
+        default = 1, 
+        nullable = False
+    )
+    role = Column(
+        Integer(), 
+        default = 0, 
+        nullable = False
+    )
     # status int, mapear en string (registrado, eliminado, activo)
     # rol (usuario, gerente, etc)
     created_at = Column(

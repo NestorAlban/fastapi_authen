@@ -4,7 +4,11 @@ from .user import (
     UserEmailDefault,
     UserInfoBack, 
     UserData,
-    UserCleanData
+    UserCleanData, 
+    UpdateUser,
+    UpdateUserRole,
+    UpdateUserStatus,
+    RolesNum
 )
 from .login import LoginData
 from .token import Token, TokenData

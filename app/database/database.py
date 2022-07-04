@@ -4,7 +4,6 @@ from fastapi import (
     HTTPException, 
     Path, 
     Depends,
-    status
 )
 from fastapi.security import (
     OAuth2PasswordBearer, 
@@ -35,7 +34,7 @@ from passlib.context import CryptContext
 from .hash_pass import Hash_Password
 from .token import Token
 from .oauth import GetCurrentUsers
-from .domain import UserDomaint
+from .domain import UserDomaint, Domain
 from .mail import Mail
 
 from app.schemas import UserData
@@ -106,7 +105,7 @@ class DataBase:
             User.name == name
         ).first()
         if user:
-            user_domain= DataBase.create_user_domain(user)
+            user_domain= Domain.create_user_domain(user)
             print("============================")
             print(user_domain.password)
             print(password)
@@ -165,7 +164,10 @@ class DataBase:
             if user:
                 self.session.add(user)
                 self.session.commit()
-                user_domain = DataBase.create_user_domain(user)
+                # can user the create_user_domain in this file or in domain file
+                # user_domain = DataBase.create_user_domain(user)
+
+                user_domain = Domain.create_user_domain(user)
                 print("============================")
                 print(user_domain.id)
                 print("============================")
@@ -193,7 +195,7 @@ class DataBase:
         for user in users:
             print(user)
             if user:
-                user_domain=DataBase.create_user_domain(user)
+                user_domain = Domain.create_user_domain(user)
                 print("=====================get_all_users1=======================")
                 print(user_domain, type(user_domain), user_domain.id)
                 print("=====================get_all_users1=======================")
@@ -227,7 +229,7 @@ class DataBase:
         print("Email>error data 2")
         if user:
             code = str(uuid.uuid1())
-            user_domain=DataBase.create_user_domain(user)
+            user_domain=Domain.create_user_domain(user)
             print(user_domain, type(user_domain), user_domain.id)
         self.session.close()
 
@@ -253,7 +255,74 @@ class DataBase:
         # print(send)
         return {"user": user, "reset_code": code}
 
-    def change_password():
-        pass
+    def update_user(
+        self, 
+        id: int, 
+        name: str, 
+        email: str
+    ):
+        user_domain = None
+        user = self.session.query(User).filter(User.id == id).first()
+        if user:
+            user.name = name
+            user.email = email
+            self.session.commit()
+            user_domain = Domain.create_user_domain(user)
+        self.session.close()
+        return user_domain
+
+    def deactivate_user(
+        self, 
+        id: int
+    ):
+        user_domain = None
+        user = self.session.query(User).filter(User.id == id).first()
+        if user:
+            user.is_active = DELETED_USER
+            self.session.commit()
+            user_domain = Domain.create_user_domain(user)
+        self.session.close()
+        return user_domain
+
+    def activate_user(
+        self, 
+        id: int
+    ):
+        user_domain = None
+        user = self.session.query(User).filter(User.id == id).first()
+        if user:
+            user.is_active = ACTIVE_USER
+            self.session.commit()
+            user_domain = Domain.create_user_domain(user)
+        self.session.close()
+        return user_domain
+
+    def update_user_role(
+        self, 
+        id: int, 
+        role: int
+    ):
+        user_domain = None
+        user = self.session.query(User).filter(User.id == id).first()
+        if user:
+            user.role = role
+            self.session.commit()
+            user_domain = Domain.create_user_domain(user)
+        self.session.close()
+        return user_domain
+
+    def update_user_status(
+        self, 
+        id: int, 
+        status: int
+    ):
+        user_domain = None
+        user = self.session.query(User).filter(User.id == id).first()
+        if user:
+            user.status = status
+            self.session.commit()
+            user_domain = Domain.create_user_domain(user)
+        self.session.close()
+        return user_domain
 
 

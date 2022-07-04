@@ -7,3 +7,8 @@ from .get_all_users_usercase import AllUserGetter
 from .get_all_users_clean_usercase import AllUserCleanGetter
 from .get_all_active_users_usercase import AllActiveUserGetter
 from .change_user_password_usercase import EmailUserGetter
+from .update_user_data_usercase import UserUpdate
+from .activate_user_usercase import UserActivator
+from .deactivate_user_usercase import UserDeactivator
+from .update_user_role_usercase import UserRoleUpdate
+from .update_user_status_usercase import UserStatusUpdate

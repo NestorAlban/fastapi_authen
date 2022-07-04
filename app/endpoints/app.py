@@ -8,7 +8,12 @@ from app.endpoints import (
     get_all_users_endpoint,
     get_all_users_clean_endpoint,
     get_all_active_users_endpoint,
-    change_user_password_endpoint
+    change_user_password_endpoint,
+    update_user_data_endpoint,
+    activate_user_endpoint,
+    deactivate_user_endpoint,
+    update_user_role_endpoint,
+    update_user_status_endpoint
 )
 
 from dotenv import load_dotenv
@@ -26,4 +31,9 @@ def create_app():
     app.include_router(get_all_users_clean_endpoint.router)
     app.include_router(get_all_active_users_endpoint.router) 
     app.include_router(change_user_password_endpoint.router)
+    app.include_router(update_user_data_endpoint.router)
+    app.include_router(activate_user_endpoint.router)
+    app.include_router(deactivate_user_endpoint.router)
+    app.include_router(update_user_role_endpoint.router)
+    app.include_router(update_user_status_endpoint.router)
     return app
