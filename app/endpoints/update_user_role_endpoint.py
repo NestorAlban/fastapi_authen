@@ -44,7 +44,7 @@ def update_user_role(
         user_update = UserRoleUpdate()
         # role = new_user_data.role
         role = roles
-        if type(role) == int and role < 5:
+        if type(role) == int:
             # users = user_update.run(UpdateUserRole(
             #     id = new_user_data.id, 
             #     role = new_user_data.role

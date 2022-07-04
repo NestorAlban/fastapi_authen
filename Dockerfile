@@ -8,6 +8,6 @@ COPY requirements.txt .
 
 RUN pip install -r requirements.txt
 
-COPY ./app ./app
+COPY ./app ./fastapi-app
 
-CMD ["python", "./app/main.py"]
+CMD ["python", "./fastapi-app/main.py"]

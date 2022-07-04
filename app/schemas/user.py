@@ -67,3 +67,5 @@ class UserCleanData(BaseModel):
     role: Optional[int] = Field()
     created_at: Optional[datetime] = Field()
     updated_at: Optional[datetime] = Field()
+
+

@@ -7,7 +7,11 @@
     ```shell
     pip --disable-pip-version-check list --format=freeze >requirements.txt
     ´´´
-3. Run Docker file
+3. Install packages with pip
+#
+4. Install packages with poetry
+#
+5. Run Docker file
     - Create image
         ```shell
         docker build -t python-fast .
@@ -16,7 +20,7 @@
         ```shell
         docker run -p 8000:8000 python-fast
         ´´´
-4. App Flow
+6. App Flow
     Folder database
     Folder services
     Folder usercase
