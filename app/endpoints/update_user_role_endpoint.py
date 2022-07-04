@@ -34,26 +34,27 @@ USER_KEY: Final = "user"
 )
 def update_user_role(
     # new_user_data: UpdateUserRole,
-    id: int,
+    ids: int,
     roles: int,
     # new_user_data_2: RolesNum
 ):
     success = False
-    users_response = None
+    user_response = None
+    print("=========================1")
     try:
+        print("=========================2")
         user_update = UserRoleUpdate()
         # role = new_user_data.role
         role = roles
-        if type(role) == int:
-            # users = user_update.run(UpdateUserRole(
-            #     id = new_user_data.id, 
-            #     role = new_user_data.role
-            # ))
-            users = user_update.run(
-                id = id, 
+        if type(role) == int and role < 5:
+            print("=========================3")
+            users = user_update.run(UpdateUserRole(
+                id = ids, 
                 role = roles
-            )
+            ))
+
             if users:
+                print("=========================4")
                 success = True
                 #if users_response used just replace the user_response with it in the response
                 users_response = UserCleanData(**users.__dict__)

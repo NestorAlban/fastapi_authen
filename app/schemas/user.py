@@ -39,7 +39,6 @@ class RolesNum(BaseModel):
     #     )
     role: int = Query(
         ...,
-        lt = 5,
         # examples = {
         #     "role1": 0,
         #     "role2": 1,
