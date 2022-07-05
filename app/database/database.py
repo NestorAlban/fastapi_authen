@@ -18,7 +18,10 @@ from sqlalchemy.orm import sessionmaker
 from sqlalchemy import true as sa_true
 from sqlalchemy.exc import IntegrityError
 
-from app.models.user import User
+from app.models import (
+    User, 
+    Product
+)
 
 from typing import Final
 from typing import List
@@ -34,7 +37,11 @@ from passlib.context import CryptContext
 from .hash_pass import Hash_Password
 from .token import Token
 from .oauth import GetCurrentUsers
-from .domain import UserDomaint, Domain
+from .domain import (
+    UserDomaint,
+    ProductDomaint, 
+    Domain
+)
 from .mail import Mail
 
 from app.schemas import UserData
@@ -317,7 +324,11 @@ class DataBase:
         status: int
     ):
         user_domain = None
-        user = self.session.query(User).filter(User.id == id).first()
+        user = self.session.query(
+            User
+        ).filter(
+            User.id == id
+        ).first()
         if user:
             user.status = status
             self.session.commit()
@@ -325,4 +336,30 @@ class DataBase:
         self.session.close()
         return user_domain
 
+    ##Products
 
+    def create_product(
+        self, 
+        name: str, 
+        branch: str,
+    ):
+        product_domain = None
+        product = Product(
+            name = name, 
+            branch = branch,
+        )
+        try:
+            if product:
+                self.session.add(product)
+                self.session.commit()
+                # can product the create_product_domain in this file or in domain file
+                # product_domain = DataBase.create_product_domain(product)
+
+                product_domain = Domain.create_product_domain(product)
+                print("============================")
+                print(product_domain.id)
+                print("============================")
+        except IntegrityError as e:
+            assert isinstance(e.orig, UniqueViolation)
+        self.session.close()
+        return product_domain

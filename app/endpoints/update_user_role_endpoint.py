@@ -46,7 +46,7 @@ def update_user_role(
         user_update = UserRoleUpdate()
         # role = new_user_data.role
         role = roles
-        if type(role) == int and role < 5:
+        if type(role) == int and role < 4:
             print("=========================3")
             users = user_update.run(UpdateUserRole(
                 id = ids, 
@@ -75,11 +75,13 @@ def update_user_role(
                     "========================="
                 )
                 new_role = Mapping_rath.role_mapping(user_response.get('role'))
+                status_name = Mapping_rath.status_mapping(user_response.get('status'))
                 print("=========================",
                     new_role,
                     "========================="
                 )
                 user_response.update({'role': new_role})
+                user_response.update({'status': status_name})
         else:
             raise HTTPException(
                     status_code = status.HTTP_404_NOT_FOUND,

@@ -15,6 +15,17 @@ class UserDomaint:
     created_at: Optional[datetime]
     updated_at: Optional[datetime]
 
+@dataclass(frozen=True)
+class ProductDomaint:
+    id: int
+    name: str
+    branch: str
+    amount: int
+    available: Optional[bool]
+    status: int
+    created_at: Optional[datetime]
+    updated_at: Optional[datetime]
+
 class Domain:
     def __init__(self) -> None:
         pass
@@ -34,3 +45,20 @@ class Domain:
             user.updated_at
         )
         return user_domain
+
+    @staticmethod
+    def create_product_domain(product):
+        #you can use the ProductDomain in this file or ProductDomaint in domain.py file in this folder
+        product_domain = ProductDomaint(
+            product.id,
+            product.name,
+            product.branch,
+            product.amount,
+            product.available,
+            product.status,
+            product.created_at,
+            product.updated_at
+        )
+        return product_domain
+
+    

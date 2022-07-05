@@ -11,8 +11,8 @@ from sqlalchemy.ext.declarative import declarative_base
 
 Base = declarative_base()
 
-class User(Base):
-    __tablename__ = "user_password"
+class Product(Base):
+    __tablename__ = "product"
 
     id = Column(
         Integer, 
@@ -23,27 +23,22 @@ class User(Base):
         nullable = False, 
         unique = True
     )
-    email = Column(
+    branch = Column(
         String, 
         nullable = False, 
-        unique = True
+        unique = False
     )
-    password = Column(
-        String, 
-        nullable = False, 
-        unique = True
+    amount = Column(
+        Integer(), 
+        default = 0, 
+        nullable = False
     )
-    is_active = Column(
+    available = Column(
         Boolean(), 
-        default = True, 
+        default = False, 
         nullable = False
     )
     status = Column(
-        Integer(), 
-        default = 1, 
-        nullable = False
-    )
-    role = Column(
         Integer(), 
         default = 0, 
         nullable = False

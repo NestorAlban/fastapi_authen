@@ -12,3 +12,5 @@ from .activate_user_usercase import UserActivator
 from .deactivate_user_usercase import UserDeactivator
 from .update_user_role_usercase import UserRoleUpdate
 from .update_user_status_usercase import UserStatusUpdate
+
+from .create_product_usercase import ProductCreator

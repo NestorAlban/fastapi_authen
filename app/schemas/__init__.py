@@ -10,5 +10,9 @@ from .user import (
     UpdateUserStatus,
     RolesNum
 )
+from .product import (
+    ProductInfoBack,
+    ProductData
+)
 from .login import LoginData
 from .token import Token, TokenData
