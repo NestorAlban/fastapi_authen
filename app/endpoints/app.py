@@ -14,7 +14,10 @@ from app.endpoints import (
     deactivate_user_endpoint,
     update_user_role_endpoint,
     update_user_status_endpoint,
-    create_product_endpoint
+    create_product_endpoint,
+    get_all_products_endpoint,
+    get_product_name_endpoint,
+    get_product_tag_endpoint
 )
 
 from dotenv import load_dotenv
@@ -38,4 +41,7 @@ def create_app():
     app.include_router(update_user_role_endpoint.router)
     app.include_router(update_user_status_endpoint.router)
     app.include_router(create_product_endpoint.router)
+    app.include_router(get_product_name_endpoint.router)
+    app.include_router(get_product_tag_endpoint.router)
+    app.include_router(get_all_products_endpoint.router)
     return app

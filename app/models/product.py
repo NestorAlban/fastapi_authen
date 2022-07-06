@@ -1,3 +1,4 @@
+from typing import List
 from sqlalchemy import (
     Column, 
     ForeignKey, 
@@ -5,9 +6,12 @@ from sqlalchemy import (
     Integer, 
     DateTime, 
     Boolean,
-    func
+    func,
+    PickleType
 )
 from sqlalchemy.ext.declarative import declarative_base
+from sqlalchemy.ext.mutable import MutableList
+
 
 Base = declarative_base()
 
@@ -28,9 +32,19 @@ class Product(Base):
         nullable = False, 
         unique = False
     )
+    description = Column(
+        String, 
+        nullable = False, 
+        unique = False
+    )
     amount = Column(
         Integer(), 
         default = 0, 
+        nullable = False
+    )
+    tags = Column(
+        MutableList.as_mutable(PickleType), 
+        default = [], 
         nullable = False
     )
     available = Column(

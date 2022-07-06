@@ -5,6 +5,7 @@ from fastapi import (
     Path, 
     Depends,
 )
+import fastapi
 from fastapi.security import (
     OAuth2PasswordBearer, 
     OAuth2PasswordRequestForm
@@ -13,7 +14,7 @@ from fastapi.security import (
 import os
 import uuid
 from requests import Session
-from sqlalchemy import create_engine
+from sqlalchemy import create_engine, func
 from sqlalchemy.orm import sessionmaker
 from sqlalchemy import true as sa_true
 from sqlalchemy.exc import IntegrityError
@@ -130,7 +131,7 @@ class DataBase:
                 token_type = "bearer"
             else:
                 raise HTTPException(
-                    status_code = status.HTTP_404_NOT_FOUND,
+                    status_code = fastapi.status.HTTP_404_NOT_FOUND,
                     detail = f"Incorrect password"
                 )
         
@@ -342,11 +343,15 @@ class DataBase:
         self, 
         name: str, 
         branch: str,
+        description: str,
+        tags: str
     ):
         product_domain = None
         product = Product(
             name = name, 
             branch = branch,
+            description = description,
+            tags = tags
         )
         try:
             if product:
@@ -363,3 +368,56 @@ class DataBase:
             assert isinstance(e.orig, UniqueViolation)
         self.session.close()
         return product_domain
+
+    def get_all_products(self):
+        products = self.session.query(Product).all()
+        for product in products:
+            print(product)
+            if product:
+                product_domain = Domain.create_product_domain(product)
+                print("=====================get_all_products1=======================")
+                print(product_domain, type(product_domain), product_domain.id)
+                print("=====================get_all_products1=======================")
+        self.session.close()
+        return products
+
+    def get_product_name(
+        self, 
+        part_name: str
+    ):
+        product = None
+        product = self.session.query(
+            Product
+        ).filter(
+            func.lower(Product.name).contains(part_name)
+        )
+        print("============================1")
+        print(product, type(product))
+        self.session.close()
+        return product
+
+    def get_product_tag(
+        self, 
+        part_tags: str
+    ):
+        product = None
+        product = self.session.query(
+            Product
+        ).filter(
+            func.lower(Product.tags).contains(part_tags)
+        )
+        print("============================1")
+        print(product, type(product))
+        if product:
+                product_domain = Domain.create_product_domain(product)
+                print("=====================get_tag_products1=======================")
+                print(product_domain, type(product_domain), product_domain.id)
+                print("=====================get_tag_products1=======================")
+        self.session.close()
+        return product
+
+    def a1():
+        pass
+
+    def a1():
+        pass

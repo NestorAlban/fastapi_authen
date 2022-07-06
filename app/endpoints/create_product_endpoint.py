@@ -33,11 +33,15 @@ def create_product(new_product_data: ProductInfoBack):
         product_creator = ProductCreator()
         name = new_product_data.name.strip()
         branch = new_product_data.branch.strip()
+        description = new_product_data.description.strip()
+        tags = new_product_data.tags
 
-        if len(name) != 0 and len(branch) != 0:
+        if len(name) != 0 and len(branch) != 0 and len(description) !=0:
             product = product_creator.run(ProductInfoBack(
                 name = name, 
                 branch = branch,
+                description = description,
+                tags = tags
                 )
             )
             if product:
@@ -45,6 +49,8 @@ def create_product(new_product_data: ProductInfoBack):
                     id = product.id,
                     name = product.name,
                     branch = product.branch,
+                    description = product.description,
+                    tags = product.tags,
                     amount = product.amount,
                     available = product.available,
                     status = product.status,

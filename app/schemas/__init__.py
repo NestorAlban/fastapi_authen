@@ -12,7 +12,9 @@ from .user import (
 )
 from .product import (
     ProductInfoBack,
-    ProductData
+    ProductData,
+    ProductName,
+    ProductTag
 )
 from .login import LoginData
 from .token import Token, TokenData

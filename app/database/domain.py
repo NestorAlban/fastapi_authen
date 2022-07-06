@@ -1,4 +1,4 @@
-from typing import Optional
+from typing import List, Optional
 from datetime import datetime
 
 from dataclasses import dataclass
@@ -20,6 +20,8 @@ class ProductDomaint:
     id: int
     name: str
     branch: str
+    description: str
+    tags: List[str]
     amount: int
     available: Optional[bool]
     status: int
@@ -53,6 +55,8 @@ class Domain:
             product.id,
             product.name,
             product.branch,
+            product.description,
+            product.tags,
             product.amount,
             product.available,
             product.status,

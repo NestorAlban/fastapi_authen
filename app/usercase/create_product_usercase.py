@@ -14,7 +14,9 @@ class ProductCreator:
         product_service = ProductService()
         product = product_service.create_product(
             params.name,
-            params.branch
+            params.branch,
+            params.description,
+            params.tags
         )
         print("==============success1============")
         return product
