@@ -400,6 +400,7 @@ class DataBase:
         self, 
         part_tags: str
     ):
+        #explicar al sql
         product = None
         product = self.session.query(
             Product
@@ -416,8 +417,60 @@ class DataBase:
         self.session.close()
         return product
 
-    def a1():
-        pass
+    def get_product_branch(
+        self, 
+        part_branch: str
+    ):
+        product = None
+        product_domain = None
+        product = self.session.query(
+            Product
+        ).filter(
+            func.lower(Product.branch).contains(part_branch)
+        )
+        print("branch============================1")
+        print(product, type(product))
+        for prod in product:
+            print(prod)
+            if prod:
+                product_domain = Domain.create_product_domain(prod)
+                print(product_domain, type(product_domain),  
+                product_domain.tags, 
+                type(product_domain.tags), product_domain.tags[0],
+                product_domain.tags[0].lower())
 
-    def a1():
-        pass
+        self.session.close()
+        return product
+#todavia
+    def update_product_name(
+        self, 
+        id: int, 
+        name: str, 
+        branch: str,
+        description: str
+    ):
+        product_domain = None
+        product = self.session.query(Product).filter(Product.id == id).first()
+        if product:
+            product.name = name
+            product.branch = branch
+            product.description = description
+            self.session.commit()
+            product_domain = Domain.create_product_domain(product)
+        self.session.close()
+        return product_domain
+
+
+    def update_product_amount(
+        self, 
+        id: int, 
+        amount: int, 
+    ):
+        product_domain = None
+        product = self.session.query(Product).filter(Product.id == id).first()
+        if product:
+            product.amount = amount
+            self.session.commit()
+            product_domain = Domain.create_product_domain(product)
+        self.session.close()
+        return product_domain

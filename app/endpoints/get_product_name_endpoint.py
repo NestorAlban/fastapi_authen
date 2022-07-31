@@ -19,7 +19,7 @@ router = APIRouter()
 
 GET_PRODUCT_NAME_ERROR_MESSAGE: Final = "ERROR IN product name ENDPOINT"
 PRODUCT_NAME_ENDPOINT_SUMMARY: Final = "Show Products per names"
-PRODUCT_NAME_ENDPOINT_PATH: Final = "/Product/{name}"
+PRODUCT_NAME_ENDPOINT_PATH: Final = "/product/na/{name}"
 PRODUCT_KEY: Final = "product"
 
 @router.get(

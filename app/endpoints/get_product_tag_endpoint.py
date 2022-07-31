@@ -19,7 +19,7 @@ router = APIRouter()
 
 GET_PRODUCT_TAG_ERROR_MESSAGE: Final = "ERROR IN product tag ENDPOINT"
 PRODUCT_TAG_ENDPOINT_SUMMARY: Final = "Show Products per tags"
-PRODUCT_TAG_ENDPOINT_PATH: Final = "/Product/{tag}"
+PRODUCT_TAG_ENDPOINT_PATH: Final = "/product/ta/{tag}"
 PRODUCT_KEY: Final = "product"
 
 @router.get(

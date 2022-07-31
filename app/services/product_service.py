@@ -50,3 +50,39 @@ class ProductService:
         print("============================2")
         print(products, type(products))
         return products
+
+    def get_product_branch(
+        self, 
+        part_branch: str
+    ):
+        products = []
+        products = self.alchemy_db.get_product_branch(part_branch)
+        print("branch============================2")
+        print(products, type(products))
+        return products
+
+    def update_product_name(
+        self, 
+        id: int, 
+        name: str, 
+        branch: str,
+        description: str
+    ):
+        products = self.alchemy_db.update_product_name(
+            id, 
+            name, 
+            branch,
+            description
+        )
+        return products
+
+    def update_product_amount(
+        self, 
+        id: int,
+        amount: int,
+    ):
+        products = self.alchemy_db.update_product_amount(
+            id, 
+            amount
+        )
+        return products

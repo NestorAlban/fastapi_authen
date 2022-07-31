@@ -14,7 +14,8 @@ from .product import (
     ProductInfoBack,
     ProductData,
     ProductName,
-    ProductTag
+    ProductTag,
+    ProductBranch
 )
 from .login import LoginData
 from .token import Token, TokenData

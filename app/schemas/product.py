@@ -8,6 +8,9 @@ from datetime import datetime
 class ProductName(BaseModel):
     name: str = Field(default = "Example_product")
 
+class ProductBranch(BaseModel):
+    branch: str = Field(default = "saga")
+
 class ProductTag(BaseModel):
     tags: List[str] = Field(default = ["Tag1", "Tag2", "Tag3"])
 
