@@ -3,8 +3,6 @@
 class Mapping_rath():
     def __init__(self) -> None:
         pass
-
-    
     
     def role_mapping(role: int):
         print("=========role===============")

@@ -31,6 +31,16 @@ class ProductService:
         products = self.alchemy_db.get_all_products()
         return products
 
+    def get_product_id(
+        self, 
+        id: int
+    ):
+        products = []
+        products = self.alchemy_db.get_product_id(id)
+        print("id============================2")
+        print(products, type(products))
+        return products
+
     def get_product_name(
         self, 
         part_name: str
@@ -61,14 +71,14 @@ class ProductService:
         print(products, type(products))
         return products
 
-    def update_product_name(
+    def update_product_info(
         self, 
         id: int, 
         name: str, 
         branch: str,
         description: str
     ):
-        products = self.alchemy_db.update_product_name(
+        products = self.alchemy_db.update_product_info(
             id, 
             name, 
             branch,

@@ -5,47 +5,40 @@ from sqlalchemy import (
     Integer, 
     DateTime, 
     Boolean,
-    func
+    func, 
+    Table
 )
 from sqlalchemy.ext.declarative import declarative_base
-from sqlalchemy.orm import relationship, backref
+from sqlalchemy.orm import relationship
+
+from .import User, Product
 
 
 Base = declarative_base()
 
-class User(Base):
-    __tablename__ = "user_password"
+class Sells(Base):
+    __tablename__ = "sell"
 
     id = Column(
         Integer, 
         primary_key = True
     )
-    name = Column(
-        String, 
-        nullable = False, 
-        unique = True
+    user = Column(
+        Integer,
+        ForeignKey(User.id),
+        nullable = False,
     )
-    email = Column(
-        String, 
+    product = Column(
+        Integer,
+        ForeignKey(Product.id),
         nullable = False, 
-        unique = True
-    )
-    password = Column(
-        String, 
-        nullable = False, 
-        unique = True
-    )
-    is_active = Column(
-        Boolean(), 
-        default = True, 
-        nullable = False
     )
     status = Column(
         Integer(), 
-        default = 1, 
+        default = 0, 
         nullable = False
     )
-    role = Column(
+    payment = Column(
         Integer(), 
         default = 0, 
         nullable = False
@@ -61,4 +54,11 @@ class User(Base):
         nullable = False, 
         onupdate = func.now()
     )
-    sells = relationship('Sells', backref = 'User')
+    user1 = relationship(
+        User,
+        back_populates = 'sell'
+    )
+    product1 = relationship(
+        Product,
+        back_populates = 'sell'
+    )

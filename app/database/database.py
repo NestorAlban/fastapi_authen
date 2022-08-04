@@ -21,7 +21,8 @@ from sqlalchemy.exc import IntegrityError
 
 from app.models import (
     User, 
-    Product
+    Product,
+    Sells
 )
 
 from typing import Final
@@ -56,6 +57,8 @@ CLOSED_DATABASE_MESSAGE: Final = "PostgreSQL connection is closed"
 CONNECTING_DB_MESSAGE: Final = "Connecting PostgreSQL database======"
 DELETED_USER: Final = False
 ACTIVE_USER: Final = True
+ACTIVE_PRODUCT: Final = True
+DEACTIVATE_PRODUCT: Final = False
 
 @dataclass(frozen=True)
 class UserDomain:
@@ -381,6 +384,20 @@ class DataBase:
         self.session.close()
         return products
 
+    def get_product_id(
+        self, 
+        id: int, 
+    ):
+        product = None
+        product = self.session.query(
+            Product
+        ).filter(
+            Product.id == id
+        ).first()
+        print("id============================1")
+        self.session.close()
+        return product
+    
     def get_product_name(
         self, 
         part_name: str
@@ -441,8 +458,8 @@ class DataBase:
 
         self.session.close()
         return product
-#todavia
-    def update_product_name(
+
+    def update_product_info(
         self, 
         id: int, 
         name: str, 
@@ -460,7 +477,6 @@ class DataBase:
         self.session.close()
         return product_domain
 
-
     def update_product_amount(
         self, 
         id: int, 
@@ -470,7 +486,51 @@ class DataBase:
         product = self.session.query(Product).filter(Product.id == id).first()
         if product:
             product.amount = amount
+            if amount == 0:
+                product.available = DEACTIVATE_PRODUCT
+            else:
+                product.available = ACTIVE_PRODUCT
             self.session.commit()
             product_domain = Domain.create_product_domain(product)
         self.session.close()
         return product_domain
+
+    ##Sells
+
+    def create_sell(
+        self, 
+        user: int, 
+        product: int, 
+    ):
+        sell_domain = None
+        user_cap = None
+        product_cap = None
+        
+        sell = Sells(
+            user = user, 
+            product = product,
+        )
+        try:
+            
+            if sell:
+                product_cap = self.session.query(
+                    Product
+                ).filter(
+                    Product.id == product
+                ).first()
+                user_cap = self.session.query(
+                    User
+                ).filter(
+                    User.id == user
+                ).first()
+                if product_cap and user_cap:
+                    self.session.add(sell)
+                    self.session.commit()
+                    sell_domain = Domain.create_sell_domain(sell)
+                    print("============================")
+                    print(sell_domain.id)
+                    print("============================")
+        except IntegrityError as e:
+            assert isinstance(e.orig, UniqueViolation)
+        self.session.close()
+        return sell

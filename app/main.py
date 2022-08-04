@@ -7,6 +7,7 @@ import uvicorn
 from app.endpoints.app import create_app
 from app.models.user import Base as B0
 from app.models.product import Base as B1
+from app.models.sells import Base as B2
 from app.database.database import DataBase
 
 app = create_app()
@@ -14,6 +15,7 @@ app = create_app()
 db = DataBase()
 B0.metadata.create_all(db.engine)
 B1.metadata.create_all(db.engine)
+B2.metadata.create_all(db.engine)
 db.session.close()
 
 if __name__ == "__main__":

@@ -7,10 +7,13 @@ from sqlalchemy import (
     DateTime, 
     Boolean,
     func,
-    PickleType
+    PickleType, 
+    Table
 )
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.ext.mutable import MutableList
+from sqlalchemy.orm import relationship, backref
+
 
 
 Base = declarative_base()
@@ -68,3 +71,6 @@ class Product(Base):
         nullable = False, 
         onupdate = func.now()
     )
+    # sells = relationship('Sells', back_populates = 'product')
+    # user = relationship('User', secondary = 'sell')
+    sells = relationship('Sells', backref = 'Product')

@@ -15,7 +15,17 @@ from .product import (
     ProductData,
     ProductName,
     ProductTag,
-    ProductBranch
+    ProductBranch,
+    UpdateProductInfo,
+    ProductDataSimple,
+    UpdateProductAmount,
+    ProductId
+)
+from .sells import(
+    Sell,
+    SellData,
+    SellID,
+    SellInfoBack
 )
 from .login import LoginData
 from .token import Token, TokenData
