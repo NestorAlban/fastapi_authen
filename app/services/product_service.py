@@ -56,9 +56,11 @@ class ProductService:
         part_tags: str
     ):
         products = []
+        print("============3-a=================")
         products = self.alchemy_db.get_product_tag(part_tags)
-        print("============================2")
+        print("============3-b=================")
         print(products, type(products))
+        print("============3-c=================")
         return products
 
     def get_product_branch(

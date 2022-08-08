@@ -8,7 +8,11 @@ from typing import Optional
 from datetime import datetime
 
 from app.usercase import SellCreator
-from app.schemas import SellInfoBack, SellData
+from app.schemas import (
+    SellInfoBack, 
+    SellData, 
+    SellFullData
+)
 from app.database import Mapping_rath
 
 router = APIRouter()
@@ -29,7 +33,11 @@ SELL_KEY: Final = "product"
 def create_sell(new_sell_data: SellInfoBack):
     success = False
     sell_response = None
+    sell_response_1 = None
     try:
+        sell_sell_response = None
+        sell_user_response = None
+        sell_product_response = None
         sell_creator = SellCreator()
         user = new_sell_data.user
         product = new_sell_data.product
@@ -40,15 +48,29 @@ def create_sell(new_sell_data: SellInfoBack):
                 product = product
                 )
             )
-            if sell:
+            print(sell)
+            sell_sell_response = sell.get('sell')
+            sell_user_response = sell.get('user')
+            sell_product_response = sell.get('product')
+            if sell_sell_response:
                 sell_response = SellData.construct(
-                    id = sell.id,
-                    user = sell.user,
-                    product = sell.product,
-                    status = sell.status,
-                    payment = sell.payment,
-                    created_at = sell.created_at,
-                    updated_at = sell.updated_at,
+                    id = sell_sell_response.id,
+                    user = sell_sell_response.user,
+                    product = sell_sell_response.product,
+                    status = sell_sell_response.status,
+                    payment = sell_sell_response.payment,
+                    created_at = sell_sell_response.created_at,
+                    updated_at = sell_sell_response.updated_at,
+                ).dict(by_alias=True)
+                sell_response_1 = SellFullData.construct(
+                    id = sell_sell_response.id,
+                    user = sell_user_response.name,
+                    email = sell_user_response.email,
+                    product = sell_sell_response.product,
+                    status = sell_sell_response.status,
+                    payment = sell_sell_response.payment,
+                    created_at = sell_sell_response.created_at,
+                    updated_at = sell_sell_response.updated_at,
                 ).dict(by_alias=True)
                 success = True
                 print("==============success============")

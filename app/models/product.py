@@ -8,11 +8,13 @@ from sqlalchemy import (
     Boolean,
     func,
     PickleType, 
-    Table
+    Table,
+    ARRAY
 )
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.ext.mutable import MutableList
 from sqlalchemy.orm import relationship, backref
+from sqlalchemy.dialects.postgresql import ARRAY
 
 
 
@@ -46,7 +48,8 @@ class Product(Base):
         nullable = False
     )
     tags = Column(
-        MutableList.as_mutable(PickleType), 
+        # MutableList.as_mutable(PickleType), 
+        ARRAY(String()),
         default = [], 
         nullable = False
     )

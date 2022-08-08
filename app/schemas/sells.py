@@ -22,6 +22,16 @@ class SellData(BaseModel):
     created_at: Optional[datetime] = Field()
     updated_at: Optional[datetime] = Field()
 
+class SellFullData(BaseModel):
+    id: int 
+    user: Optional[int] = Field()
+    email: str = Field()
+    product: Optional[int] = Field()
+    status: Optional[int] = Field()
+    payment: Optional[int] = Field()
+    created_at: Optional[datetime] = Field()
+    updated_at: Optional[datetime] = Field()
+
 class SellInfoBack(BaseModel):
     user: int = Field()
     product: int = Field()

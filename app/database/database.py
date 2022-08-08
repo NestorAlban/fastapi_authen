@@ -192,12 +192,15 @@ class DataBase:
         id: int, 
         get_current_user: UserData = Depends(GetCurrentUsers.get_current_user)
     ):
+        user_domain = None
         user = None
         user = self.session.query(
             User
         ).filter(
             User.id == id
         ).first()
+        if user: 
+            user_domain = Domain.create_user_domain(user)
         self.session.close()
         return user
 
@@ -396,7 +399,8 @@ class DataBase:
             Product.id == id
         ).first()
         print("id============================1")
-        product_domain = Domain.create_product_domain(product)
+        if product:
+            product_domain = Domain.create_product_domain(product)
         self.session.close()
         return product_domain
     
@@ -421,15 +425,18 @@ class DataBase:
     ):
         #explicar al sql
         product = None
+        print("============4-a=================")
         product = self.session.query(
             Product
         ).filter(
-            func.lower(Product.tags).contains(part_tags)
-        )
-        print("============================1")
+            Product.tags.contains([part_tags])
+        ).all()
+        print("============4-b=================")
         print(product, type(product))
-        if product:
-                product_domain = Domain.create_product_domain(product)
+        for prod in product:
+            if prod:
+                print("============4-c=================")
+                product_domain = Domain.create_product_domain(prod)
                 print("=====================get_tag_products1=======================")
                 print(product_domain, type(product_domain), product_domain.id)
                 print("=====================get_tag_products1=======================")

@@ -15,7 +15,7 @@ class ProductBranch(BaseModel):
     branch: str = Field(default = "saga")
 
 class ProductTag(BaseModel):
-    tags: List[str] = Field(default = ["Tag1", "Tag2", "Tag3"])
+    tags: str = Field(default = "Tag1")
 
 class UpdateProductInfo(BaseModel):
     id: int 

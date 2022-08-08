@@ -9,7 +9,9 @@ class ProductTagGetter:
 
     def run(self, params: ProductTag) -> Product:
         product_service = ProductService()
+        print("============2-a=================")
         product = product_service.get_product_tag(params.tags)
-        print("============================3")
+        print("============2-b=================")
         print(product, type(product))
+        print("============2-c=================")
         return product

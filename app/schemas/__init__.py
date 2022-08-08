@@ -25,7 +25,8 @@ from .sells import(
     Sell,
     SellData,
     SellID,
-    SellInfoBack
+    SellInfoBack,
+    SellFullData
 )
 from .login import LoginData
 from .token import Token, TokenData
