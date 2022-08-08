@@ -26,3 +26,8 @@
     Folder usercase
     Folder endpoints 
 
+DATABASE_USER=postgres
+DATABASE_PASSWORD=12345
+DATABASE_HOST=localhost
+DATABASE_PORT=5432
+DATABASE_NAME=bd-users

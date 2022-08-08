@@ -71,6 +71,4 @@ class Product(Base):
         nullable = False, 
         onupdate = func.now()
     )
-    # sells = relationship('Sells', back_populates = 'product')
-    # user = relationship('User', secondary = 'sell')
-    sells = relationship('Sells', backref = 'Product')
+

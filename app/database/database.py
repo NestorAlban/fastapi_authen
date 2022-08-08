@@ -388,6 +388,7 @@ class DataBase:
         self, 
         id: int, 
     ):
+        product_domain = None
         product = None
         product = self.session.query(
             Product
@@ -395,8 +396,9 @@ class DataBase:
             Product.id == id
         ).first()
         print("id============================1")
+        product_domain = Domain.create_product_domain(product)
         self.session.close()
-        return product
+        return product_domain
     
     def get_product_name(
         self, 

@@ -41,7 +41,19 @@ def get_product_name(id: int = Path(
         print("============================4")
         print(product_id, type(product_id))
         if product_id:
-            product_response = ProductData(**product_id.__dict__)
+            # product_response = ProductData(**product_id.__dict__)
+            product_response = ProductData.construct(
+                id = product_id.id,
+                name = product_id.name,
+                branch = product_id.branch,
+                description = product_id.description,
+                tags = product_id.tags,
+                amount = product_id.amount,
+                available = product_id.available,
+                status = product_id.status,
+                created_at = product_id.created_at,
+                updated_at = product_id.updated_at,
+            ).dict(by_alias=True)
     except Exception as error:
         logging.error(GET_PRODUCT_ID_ERROR_MESSAGE, error)
     return {PRODUCT_KEY: product_response}

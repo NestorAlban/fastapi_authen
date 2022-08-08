@@ -42,6 +42,17 @@ def get_one_user(id: int = Path(
         one_user = one_user_getter.run(UserId(id = id))
         if one_user:
             one_user_response = UserData(**one_user.__dict__)
+            one_user_response = UserData.construct(
+                id = one_user.id,
+                name = one_user.name,
+                email = one_user.email,
+                password = one_user.password,
+                is_active = one_user.is_active,
+                status = one_user.status,
+                role = one_user.role,
+                created_at = one_user.created_at,
+                updated_at = one_user.updated_at,
+            ).dict(by_alias=True)
             print("22222222============================11111")
     except Exception as error:
         logging.error(GET_ONE_USER_ERROR_MESSAGE, error)

@@ -25,12 +25,12 @@ class Sells(Base):
     )
     user = Column(
         Integer,
-        ForeignKey(User.id),
+        # ForeignKey(User.id),
         nullable = False,
     )
     product = Column(
         Integer,
-        ForeignKey(Product.id),
+        # ForeignKey(Product.id),
         nullable = False, 
     )
     status = Column(
@@ -53,12 +53,4 @@ class Sells(Base):
         default = func.now(), 
         nullable = False, 
         onupdate = func.now()
-    )
-    user1 = relationship(
-        User,
-        back_populates = 'sell'
-    )
-    product1 = relationship(
-        Product,
-        back_populates = 'sell'
     )

@@ -61,4 +61,4 @@ class User(Base):
         nullable = False, 
         onupdate = func.now()
     )
-    sells = relationship('Sells', backref = 'User')
+
