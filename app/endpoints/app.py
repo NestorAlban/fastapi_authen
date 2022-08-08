@@ -22,7 +22,8 @@ from app.endpoints import (
     update_product_data_endpoint,
     update_product_amount_endpoint,
     get_product_id_endpoint,
-    create_sell_endpoint
+    create_company_endpoint,
+    create_sell_endpoint,
 )
 
 from dotenv import load_dotenv
@@ -55,6 +56,8 @@ def create_app():
     app.include_router(get_product_tag_endpoint.router)
     app.include_router(update_product_data_endpoint.router)
     app.include_router(update_product_amount_endpoint.router)
+    ##Company
+    app.include_router(create_company_endpoint.router)
     ##Sells
     app.include_router(create_sell_endpoint.router)
     return app

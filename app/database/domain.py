@@ -29,6 +29,14 @@ class ProductDomaint:
     updated_at: Optional[datetime]
 
 @dataclass(frozen=True)
+class CompanyDomaint:
+    id: int
+    name: str
+    status: int
+    created_at: Optional[datetime]
+    updated_at: Optional[datetime]
+
+@dataclass(frozen=True)
 class SellsDomaint:
     id: int
     user: int
@@ -74,6 +82,17 @@ class Domain:
             product.updated_at
         )
         return product_domain
+
+    @staticmethod
+    def create_company_domain(company):
+        company_domain = CompanyDomaint(
+            company.id,
+            company.name,
+            company.status,
+            company.created_at,
+            company.updated_at
+        )
+        return company_domain
 
     @staticmethod
     def create_sell_domain(sells):

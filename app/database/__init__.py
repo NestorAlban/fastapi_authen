@@ -6,7 +6,8 @@ from .oauth import GetCurrentUsers
 from .domain import (
     UserDomaint, 
     Domain, 
-    ProductDomaint, 
+    ProductDomaint,
+    CompanyDomaint, 
     SellsDomaint
 )
 from .mail import Mail

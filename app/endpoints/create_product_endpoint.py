@@ -39,7 +39,7 @@ def create_product(new_product_data: ProductInfoBack):
         if len(name) != 0 and len(branch) != 0 and len(description) !=0:
             product = product_creator.run(ProductInfoBack(
                 name = name, 
-                branch = branch,
+                branch = branch.lower(),
                 description = description,
                 tags = tags
                 )

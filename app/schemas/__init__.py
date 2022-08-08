@@ -21,6 +21,11 @@ from .product import (
     UpdateProductAmount,
     ProductId
 )
+from .company import(
+    CompanyData,
+    CompanyId,
+    CompanyName
+)
 from .sells import(
     Sell,
     SellData,

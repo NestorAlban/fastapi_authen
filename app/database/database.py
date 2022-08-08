@@ -22,6 +22,7 @@ from sqlalchemy.exc import IntegrityError
 from app.models import (
     User, 
     Product,
+    Branch,
     Sells
 )
 
@@ -353,23 +354,39 @@ class DataBase:
         tags: str
     ):
         product_domain = None
-        product = Product(
-            name = name, 
-            branch = branch,
-            description = description,
-            tags = tags
-        )
+        company_domain = None
+        company = None
+        branch_lower = branch.lower()
         try:
-            if product:
-                self.session.add(product)
-                self.session.commit()
-                # can product the create_product_domain in this file or in domain file
-                # product_domain = DataBase.create_product_domain(product)
-
-                product_domain = Domain.create_product_domain(product)
-                print("============================")
-                print(product_domain.id)
-                print("============================")
+            company = self.session.query(
+                Branch
+            ).filter(
+                func.lower(Branch.name).contains(branch_lower)
+            ).all()
+            
+            if company:
+                for comp in company:
+                    company_domain = Domain.create_company_domain(comp)
+                    print(
+                        company_domain.id,
+                        company_domain.name
+                    )
+                    if branch_lower == company_domain.name.lower():
+                        product = Product(
+                            name = name, 
+                            branch = company_domain.name,
+                            description = description,
+                            tags = tags
+                        )
+                        if product:
+                            self.session.add(product)
+                            self.session.commit()
+                            # can product the create_product_domain in this file or in domain file
+                            # product_domain = DataBase.create_product_domain(product)
+                            product_domain = Domain.create_product_domain(product)
+                            print("============================")
+                            print(product_domain.id)
+                            print("============================")
         except IntegrityError as e:
             assert isinstance(e.orig, UniqueViolation)
         self.session.close()
@@ -503,6 +520,30 @@ class DataBase:
             product_domain = Domain.create_product_domain(product)
         self.session.close()
         return product_domain
+
+    ##Company
+
+    def create_company(
+        self, 
+        name: str, 
+    ):
+        company_domain = None
+        company = Branch(
+            name = name, 
+        )
+        try:
+            if company:
+                self.session.add(company)
+                self.session.commit()
+
+                company_domain = Domain.create_company_domain(company)
+                print("============================")
+                print(company_domain.id)
+                print("============================")
+        except IntegrityError as e:
+            assert isinstance(e.orig, UniqueViolation)
+        self.session.close()
+        return company_domain
 
     ##Sells
 
