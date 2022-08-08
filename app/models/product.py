@@ -34,6 +34,7 @@ class Product(Base):
     )
     branch = Column(
         String, 
+        ForeignKey('company.name'),
         nullable = False, 
         unique = False
     )
@@ -74,4 +75,40 @@ class Product(Base):
         nullable = False, 
         onupdate = func.now()
     )
+    company = relationship(
+        'Branch',
+        back_populates = 'product'
+    )
 
+class Branch(Base):
+    __tablename__ = "company"
+
+    id = Column(
+        Integer, 
+        primary_key = True
+    )
+    name = Column(
+        String, 
+        nullable = False, 
+        unique = True
+    )
+    status = Column(
+        Integer(), 
+        default = 0, 
+        nullable = False
+    )
+    created_at = Column(
+        DateTime, 
+        default = func.now(), 
+        nullable = False
+    )
+    updated_at = Column(
+        DateTime, 
+        default = func.now(), 
+        nullable = False, 
+        onupdate = func.now()
+    )
+    product = relationship(
+        'Product',
+        back_populates = 'company'
+    )
