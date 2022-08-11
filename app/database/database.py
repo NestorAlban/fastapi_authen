@@ -37,6 +37,8 @@ from psycopg2.extras import RealDictCursor
 from psycopg2.errors import UniqueViolation
 
 from passlib.context import CryptContext
+
+from ..models.user import Enrollment, Vendor
 from .hash_pass import Hash_Password
 from .token import Token
 from .oauth import GetCurrentUsers
@@ -60,6 +62,8 @@ DELETED_USER: Final = False
 ACTIVE_USER: Final = True
 ACTIVE_PRODUCT: Final = True
 DEACTIVATE_PRODUCT: Final = False
+CANNOT_PROCEED_MESSAGE: Final = "Cannot proceed: "
+SPACES_FOR_MESSAGE: Final = "============================"
 
 @dataclass(frozen=True)
 class UserDomain:
@@ -318,11 +322,35 @@ class DataBase:
         role: int
     ):
         user_domain = None
+        user = None
+        vendor = None
+        vendor_domain = None
         user = self.session.query(User).filter(User.id == id).first()
+        vendor = self.session.query(Vendor).filter(Vendor.name == id).first()
         if user:
             user.role = role
             self.session.commit()
+            
             user_domain = Domain.create_user_domain(user)
+            if role == 1:
+                if not vendor:
+                    vendor = Vendor(
+                        name = user_domain.id
+                    )
+                    self.session.add(vendor)
+                if vendor and vendor.status != role:
+                    vendor.status = role
+                self.session.commit()
+                print("=====================vendor created==================")
+            elif role == 0:
+                # vendor = self.session.query(Vendor).filter(Vendor.name == id).first()
+                if vendor.status != role:
+                    vendor.status = role
+                    self.session.commit()
+                print("=====================vendor deactivated==================")
+            vendor_domain = Domain.create_vendor_domain(vendor)
+            print(vendor_domain.id)
+            print(f'================vendor status = {vendor_domain.status}==============')
         self.session.close()
         return user_domain
 
@@ -343,6 +371,96 @@ class DataBase:
             user_domain = Domain.create_user_domain(user)
         self.session.close()
         return user_domain
+
+    ##Vendor 
+
+    def create_vendor(self):
+        pass
+
+    ##Enrollment
+
+    def create_enrollment(
+        self,
+        user_id: int, 
+        vendor_id: int, 
+    ):
+        user_q = None
+        user_domain = None
+        user_domain_vendor = None
+        vendor_q = None
+        vendor_domain = None
+        enrollment_domain = None
+        enrollment = None
+        validate_user_id = None
+        validate_vendor_id = None
+        validate_vendor_status = None
+        user_q = self.session.query(
+            User
+        ).filter(
+            User.id == user_id
+        ).first()
+        vendor_q = self.session.query(
+            Vendor
+        ).filter(
+            Vendor.id == vendor_id
+        ).first()
+        
+        if user_q and vendor_q:
+            user_domain = Domain.create_user_domain(user_q)
+            vendor_domain = Domain.create_vendor_domain(vendor_q)
+            validate_user_id = user_domain.id
+            validate_vendor_id = vendor_domain.name
+            validate_vendor_status = vendor_domain.status
+            print(f'user id {validate_user_id}, vendor id {validate_vendor_id}')
+            vendor_name_q = self.session.query(
+                User
+            ).filter(
+                User.id == validate_vendor_id
+            ).first()
+            user_domain_vendor = Domain.create_user_domain(vendor_name_q)
+            user_name = user_domain.name
+            vendor_name = user_domain_vendor.name
+            try:
+                if validate_user_id != validate_vendor_id:
+                    if validate_vendor_status != 0:
+                        enrollment = Enrollment(
+                            user = user_id,
+                            vendor = vendor_id
+                        )
+                        if enrollment:
+                            self.session.add(enrollment)
+                            self.session.commit()
+                            enrollment_domain = Domain.create_enrollment_domain(enrollment)
+                        print(SPACES_FOR_MESSAGE)
+                        print(
+                            enrollment_domain.id, 
+                            enrollment_domain.user, 
+                            enrollment_domain.vendor
+                        )
+                        print(
+                            SPACES_FOR_MESSAGE +
+                            f'user name {user_name}, vendor name {vendor_name}' +
+                            SPACES_FOR_MESSAGE
+                        )
+                        print(SPACES_FOR_MESSAGE)
+                    else:
+                        print(
+                            SPACES_FOR_MESSAGE +
+                            CANNOT_PROCEED_MESSAGE + 
+                            "the vendor is not active" +
+                            SPACES_FOR_MESSAGE
+                        )
+                else:
+                    print(
+                        SPACES_FOR_MESSAGE +
+                        CANNOT_PROCEED_MESSAGE + 
+                        "the user cannot buy to itself" +
+                        SPACES_FOR_MESSAGE
+                    )
+            except IntegrityError as e:
+                assert isinstance(e.orig, UniqueViolation)
+        self.session.close()
+        return enrollment_domain
 
     ##Products
 

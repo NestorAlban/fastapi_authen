@@ -3,6 +3,8 @@ from datetime import datetime
 
 from dataclasses import dataclass
 
+##User
+
 @dataclass(frozen=True)
 class UserDomaint:
     id: int
@@ -14,6 +16,24 @@ class UserDomaint:
     role: int 
     created_at: Optional[datetime]
     updated_at: Optional[datetime]
+
+@dataclass(frozen=True)
+class VendorDomaint:
+    id: int
+    name: Optional[int]
+    status: int 
+    created_at: Optional[datetime]
+    updated_at: Optional[datetime]
+
+@dataclass(frozen=True)
+class EnrollmentDomaint:
+    id: int
+    user: Optional[int]
+    vendor: Optional[int]
+    created_at: Optional[datetime]
+    updated_at: Optional[datetime]
+
+##Product
 
 @dataclass(frozen=True)
 class ProductDomaint:
@@ -35,6 +55,8 @@ class CompanyDomaint:
     status: int
     created_at: Optional[datetime]
     updated_at: Optional[datetime]
+
+##Sells
 
 @dataclass(frozen=True)
 class SellsDomaint:
@@ -65,6 +87,28 @@ class Domain:
             user.updated_at
         )
         return user_domain
+
+    @staticmethod
+    def create_vendor_domain(vendor):
+        vendor_domain = VendorDomaint(
+            vendor.id, 
+            vendor.name, 
+            vendor.status,
+            vendor.created_at,
+            vendor.updated_at
+        )
+        return vendor_domain
+
+    @staticmethod
+    def create_enrollment_domain(enrollment):
+        enrollment_domain = EnrollmentDomaint(
+            enrollment.id, 
+            enrollment.user,
+            enrollment.vendor,
+            enrollment.created_at,
+            enrollment.updated_at
+        )
+        return enrollment_domain
 
     @staticmethod
     def create_product_domain(product):

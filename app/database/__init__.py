@@ -4,7 +4,9 @@ from .hash_pass import Hash_Password
 from .token import Token
 from .oauth import GetCurrentUsers
 from .domain import (
-    UserDomaint, 
+    UserDomaint,
+    VendorDomaint,
+    EnrollmentDomaint, 
     Domain, 
     ProductDomaint,
     CompanyDomaint, 

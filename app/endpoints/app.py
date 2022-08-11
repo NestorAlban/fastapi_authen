@@ -2,6 +2,7 @@ from app.endpoints import login_user_endpoint
 
 
 from app.endpoints import (
+    ##Users
     create_user_endpoint,
     get_user_id_endpoint,
     get_user_id_clean_endpoint,
@@ -14,6 +15,9 @@ from app.endpoints import (
     deactivate_user_endpoint,
     update_user_role_endpoint,
     update_user_status_endpoint,
+    ##Enrollment
+    create_enrollment_endpoint,
+    ##Products
     create_product_endpoint,
     get_all_products_endpoint,
     get_product_name_endpoint,
@@ -22,7 +26,9 @@ from app.endpoints import (
     update_product_data_endpoint,
     update_product_amount_endpoint,
     get_product_id_endpoint,
+    ##Company
     create_company_endpoint,
+    ##Sells
     create_sell_endpoint,
 )
 
@@ -47,6 +53,8 @@ def create_app():
     app.include_router(deactivate_user_endpoint.router)
     app.include_router(update_user_role_endpoint.router)
     app.include_router(update_user_status_endpoint.router)
+    ##Enrollment
+    app.include_router(create_enrollment_endpoint.router)
     ##Products
     app.include_router(create_product_endpoint.router)
     app.include_router(get_product_id_endpoint.router)

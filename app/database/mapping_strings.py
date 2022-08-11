@@ -8,9 +8,10 @@ class Mapping_rath():
         print("=========role===============")
         roles = {
             0: "user",
-            1: "worker level 1",
-            2: "worker level 2",
-            3: "worker level 3"
+            1: "vendor",
+            2: "worker level 1",
+            3: "worker level 2",
+            4: "worker level 3",
         }
         role_name = None
         

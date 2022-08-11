@@ -10,6 +10,13 @@ from .user import (
     UpdateUserStatus,
     RolesNum
 )
+from .vendor import (
+    VendorData
+)
+from .enrollment import (
+    EnrollmentData,
+    EnrollmentInfoBack
+)
 from .product import (
     ProductInfoBack,
     ProductData,

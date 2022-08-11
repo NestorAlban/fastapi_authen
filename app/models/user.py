@@ -62,10 +62,17 @@ class User(Base):
         nullable = False, 
         onupdate = func.now()
     )
+    # vendor = relationship(
+    #     'Vendor',
+    #     back_populates = 'user_password'
+    # )
     vendor = relationship(
         'Vendor',
-        secondary = enrollment_table,
-        back_populates = 'user_password'
+        # back_populates = 'user_password',
+    )
+    enrollment = relationship(
+        'Enrollment',
+        # back_populates = 'user_password',
     )
 
 class Vendor(Base):
@@ -75,8 +82,14 @@ class Vendor(Base):
         Integer, 
         primary_key = True
     )
+    # name = Column(
+    #     String, 
+    #     nullable = False, 
+    #     unique = True
+    # )
     name = Column(
-        String, 
+        Integer, 
+        ForeignKey("user_password.id"),
         nullable = False, 
         unique = True
     )
@@ -96,49 +109,77 @@ class Vendor(Base):
         nullable = False, 
         onupdate = func.now()
     )
+    # user = relationship(
+    #     'User',
+    #     back_populates = 'vendor',
+    #     # secondary = enrollment_table,
+    #     # secondary = 'Enrollment',
+    # )
     user = relationship(
         'User',
-        secondary = enrollment_table,
         back_populates = 'vendor',
-        # secondary = 'Enrollment',
+    )
+    enrollment = relationship(
+        'Enrollment',
+        # back_populates = 'vendor',
     )
 
-# class Enrollment(Base):
-#     __tablename__ = "enrollment"
+class Enrollment(Base):
+    __tablename__ = "enrollment"
 
-#     id = Column(
-#         Integer, 
-#         primary_key = True
-#     )
-#     user = Column(
-#         Integer, 
-#         ForeignKey("user_password.id"),
-#         nullable = False,
-#     )
-#     vendor = Column(
-#         Integer(), 
-#         ForeignKey("vendor.id"),
-#         nullable = False,
-#     )
-
-enrollment_table = Table(
-    "enrollment",
-    Base.metadata,
-    Column(
-        'id',
+    id = Column(
         Integer, 
         primary_key = True
-    ),
-    Column(
-        'user',
+    )
+    user = Column(
         Integer, 
         ForeignKey("user_password.id"),
         nullable = False,
-    ),
-    Column(
-        'vendor',
-        Integer, 
+    )
+    vendor = Column(
+        Integer(), 
         ForeignKey("vendor.id"),
         nullable = False,
     )
-)
+    created_at = Column(
+        DateTime, 
+        default = func.now(), 
+        nullable = False
+    )
+    updated_at = Column(
+        DateTime, 
+        default = func.now(), 
+        nullable = False, 
+        onupdate = func.now()
+    )
+    vendor_relation = relationship(
+        'Vendor',
+        back_populates = 'enrollment'
+    )
+    user_relation = relationship(
+        'User',
+        back_populates = 'enrollment'
+    )
+
+
+# enrollment_table = Table(
+#     "enrollment",
+#     Base.metadata,
+#     Column(
+#         'id',
+#         Integer, 
+#         primary_key = True
+#     ),
+#     Column(
+#         'user',
+#         Integer, 
+#         ForeignKey("user_password.id"),
+#         nullable = False,
+#     ),
+#     Column(
+#         'vendor',
+#         Integer, 
+#         ForeignKey("vendor.id"),
+#         nullable = False,
+#     )
+# )
