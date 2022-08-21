@@ -19,7 +19,7 @@ router = APIRouter()
 
 DEACTIVATE_USER_ERROR_MESSAGE: Final = "ERROR IN deactivate_user ENDPOINT"
 DEACTIVATE_USER_ENDPOINT_SUMMARY: Final = "Deactivate User"
-DEACTIVATE_USER_ENDPOINT_PATH: Final = "/user/deactivate"
+DEACTIVATE_USER_ENDPOINT_PATH: Final = "/user/deactivate/{id}"
 SUCCESS_KEY: Final = "success"
 USER_KEY: Final = "user"
 
@@ -38,8 +38,20 @@ def activate_user(id: int):
         user_getter = UserDeactivator()
         user = user_getter.run(UserId(id=id))
         if user:
+            # success = True
+            # user_response = UserCleanData.construct(**user.__dict__)
+            user_response = UserCleanData.construct(
+                id = user.id,
+                name = user.name,
+                email = user.email,
+                # password = user.password,
+                is_active = user.is_active,
+                status = user.status,
+                role = user.role,
+                created_at = user.created_at,
+                updated_at = user.updated_at,
+            ).dict(by_alias=True)
             success = True
-            user_response = UserCleanData.construct(**user.__dict__)
     except Exception as error:
         logging.error(DEACTIVATE_USER_ERROR_MESSAGE, error)
 

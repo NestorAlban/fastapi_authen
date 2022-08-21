@@ -1,3 +1,5 @@
+from email import header
+import json
 import pytest
 from app.usercase import (
     UserDeactivator
@@ -11,7 +13,7 @@ from fastapi.testclient import TestClient
 EXAMPLE_NAME = "Example"
 EXAMPLE_EMAIL = "example@example.com"
 EXAMPLE_PASSWORD = "example_password"
-def test_update_user(app, create_user):
+def test_delete_user(app, create_user):
     db = DataBase()
     user_service = UserService()
     user_created = create_user(
@@ -42,29 +44,30 @@ def test_update_user(app, create_user):
     print(
         response_1,
         '\n', 
-        user.id
+        user.id,
+        type(user.id)
     )
     client = TestClient(app)
     response = client.delete(
-        "/user/deactivate",
+        "/user/deactivate/{}".format(user.id),
         json={
             "id": user.id,
         }
     ).json()
     print('==============response===================')
     print(response)
-    # new_user = response.get('user')
-    # print('===========second user=================')
-    # print(
-    #     new_user,
-    #     new_user.get('id'),
-    #     '\n', 
-    # )
+    new_user = response.get('user')
+    print('===========second user=================')
+    print(
+        new_user,
+        new_user.get('id'),
+        '\n', 
+    )
     assert response is not None
-    # assert new_user.get('id') == user.id
-    # assert new_user.get('name') == EXAMPLE_NAME
-    # assert new_user.get('email') == EXAMPLE_EMAIL
-    # assert new_user.get('is_active') == False
+    assert new_user.get('id') == user.id
+    assert new_user.get('name') == EXAMPLE_NAME
+    assert new_user.get('email') == EXAMPLE_EMAIL
+    assert new_user.get('is_active') == False
     user_service.delete_user_id(user.id)
 
     
