@@ -192,6 +192,28 @@ class DataBase:
         self.session.close()
         return user_domain
 
+    def delete_user_id(
+        self, 
+        id: int, 
+    ):
+        user_domain = None
+        user = None
+        try:
+            user = self.session.query(
+                User
+            ).filter(
+                User.id == id
+            ).first()
+            if user:
+                self.session.delete(user)
+                self.session.commit()
+                user_domain = Domain.create_user_domain(user)
+        except IntegrityError as e:
+            assert isinstance(e.orig, UniqueViolation)
+        self.session.close()
+        return user_domain
+
+
     def get_user_id(
         self, 
         id: int, 
@@ -505,6 +527,28 @@ class DataBase:
                             print("============================")
                             print(product_domain.id)
                             print("============================")
+        except IntegrityError as e:
+            print(e)
+            assert isinstance(e.orig, UniqueViolation)
+        self.session.close()
+        return product_domain
+
+    def delete_product_id(
+        self, 
+        id: int, 
+    ):
+        product_domain = None
+        product = None
+        try:
+            product = self.session.query(
+                Product
+            ).filter(
+                Product.id == id
+            ).first()
+            if product:
+                self.session.delete(product)
+                self.session.commit()
+                product_domain = Domain.create_product_domain(product)
         except IntegrityError as e:
             assert isinstance(e.orig, UniqueViolation)
         self.session.close()

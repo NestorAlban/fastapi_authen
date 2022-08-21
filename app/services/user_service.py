@@ -37,6 +37,13 @@ class UserService:
         print("==============success2============")
         return user
     
+    def delete_user_id(
+        self, 
+        id: int
+    ):
+        user = self.alchemy_db.delete_user_id(id)
+        return user
+
     def get_user_id(
         self, 
         id: int

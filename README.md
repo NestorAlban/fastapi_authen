@@ -27,3 +27,20 @@
     Folder usercase
     Folder endpoints 
 
+7. Run Docker
+    - Create image
+        ```shell
+            sudo docker-compose up
+        ´´´
+    - Remove db data
+        ```shell
+            sudo remove -r -f postgres-data
+        ´´´
+
+create new virtualenv with pyenv
+
+- pyenv virtualenv <python version> <folder/project name>
+- pyenv local <folder/project name>
+
+install inside the virtualenv
+- pithon -m pip install <library name>

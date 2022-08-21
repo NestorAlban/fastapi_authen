@@ -34,12 +34,25 @@ from app.endpoints import (
 
 from dotenv import load_dotenv
 from fastapi import FastAPI
+from app.models.user import Base as B0
+from app.models.product import Base as B1
+from app.models.sells import Base as B2
+from app.database.database import DataBase
+from sqlalchemy.ext.declarative import declarative_base
 
+Base = declarative_base()
 load_dotenv()
 
 def create_app():
     app = FastAPI()
     ##Users
+
+    # Crear estructura básica de modelos en base datos
+    db = DataBase()
+
+    B0.metadata.create_all(db.engine)
+    B1.metadata.create_all(db.engine)
+    B2.metadata.create_all(db.engine)
     app.include_router(login_user_endpoint.router)
     app.include_router(create_user_endpoint.router)
     app.include_router(get_user_id_endpoint.router)

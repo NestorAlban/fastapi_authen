@@ -17,13 +17,26 @@ class ProductService:
         description: str,
         tags: List[str]
     ):
+        print("=PRODUCT PARAMS=")
+        print(name)
+        print(branch)
+        print(description)
+        print(tags)
         product = self.alchemy_db.create_product(
             name, 
             branch,
             description,
             tags
         )
-        print("==============success2============")
+        print("==============asdasdasd2============")
+        print(product)
+        return product
+
+    def delete_product_id(
+        self, 
+        id: int
+    ):
+        product = self.alchemy_db.delete_product_id(id)
         return product
 
     def get_all_products(self):
