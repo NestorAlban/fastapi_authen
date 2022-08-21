@@ -546,9 +546,11 @@ class DataBase:
                 Product.id == id
             ).first()
             if product:
+                product_domain = Domain.create_product_domain(product)
                 self.session.delete(product)
                 self.session.commit()
-                product_domain = Domain.create_product_domain(product)
+                print("=============delete product===============")
+                print(product_domain)
         except IntegrityError as e:
             assert isinstance(e.orig, UniqueViolation)
         self.session.close()
@@ -702,6 +704,50 @@ class DataBase:
                 print("============================")
                 print(company_domain.id)
                 print("============================")
+        except IntegrityError as e:
+            assert isinstance(e.orig, UniqueViolation)
+        self.session.close()
+        return company_domain
+
+    def delete_company_id(
+        self, 
+        id: int, 
+    ):
+        company_domain = None
+        company = None
+        try:
+            company = self.session.query(
+                Branch
+            ).filter(
+                Branch.id == id
+            ).first()
+            if company:
+                self.session.delete(company)
+                self.session.commit()
+                company_domain = Domain.create_company_domain(company)
+        except IntegrityError as e:
+            assert isinstance(e.orig, UniqueViolation)
+        self.session.close()
+        return company_domain
+
+    def get_company_name(
+        self, 
+        part_name: str
+    ):
+        company_domain = None
+        company = None
+        try:
+            company = self.session.query(
+                Branch
+            ).filter(
+                func.lower(Branch.name).contains(part_name)
+            )
+            print(company)
+            if company:
+                print("===========companies=================1")
+                company_domain = Domain.create_company_domain(company)
+                print(company_domain, type(company_domain))
+                
         except IntegrityError as e:
             assert isinstance(e.orig, UniqueViolation)
         self.session.close()

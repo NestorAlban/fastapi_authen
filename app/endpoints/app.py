@@ -28,6 +28,8 @@ from app.endpoints import (
     get_product_id_endpoint,
     ##Company
     create_company_endpoint,
+    get_company_name_endpoint,
+    
     ##Sells
     create_sell_endpoint,
 )
@@ -79,6 +81,7 @@ def create_app():
     app.include_router(update_product_amount_endpoint.router)
     ##Company
     app.include_router(create_company_endpoint.router)
+    app.include_router(get_company_name_endpoint.router)
     ##Sells
     app.include_router(create_sell_endpoint.router)
     return app

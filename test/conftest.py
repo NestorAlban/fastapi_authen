@@ -1,5 +1,8 @@
 import sys
+from typing import List
+from app.services.company_service import CompanyService
 from app.services.product_service import ProductService
+from app.services import UserService
 import pytest
 from venv import create
 from dotenv import load_dotenv
@@ -22,6 +25,18 @@ def app():
     return _app
 
 @pytest.fixture(scope="function")
+def create_user():
+    def _create_user(name, email, password):
+        user_service = UserService()
+        user_created = user_service.create_user(
+            name,
+            email,
+            password,
+        )
+        return user_created
+    return _create_user
+
+@pytest.fixture(scope="function")
 def create_product():
     def _create_product(name, branch, description, tags):
         product_service = ProductService()
@@ -36,19 +51,47 @@ def create_product():
     return _create_product
 
 @pytest.fixture(scope="function")
-def create_products(products):
-    product_service = ProductService()
-    products_created = []
-    for product in products:
-        product_created = product_service.create_product(
-            product.get("name"),
-            product.get("branch"),
-            product.get("description"),
-            product.get("tags"),
-        )
-        products_created.append(product_created)
+def delete_companies():
+    def _delete_companies(branches: List[str]):
+        company_service = CompanyService()
+        companies_got = []
+        for branch in branches:
+            company_got = company_service.delete_company_id(
+                branch.get('id'),
+            )
+            companies_got.append(company_got)
 
-    return products_created
+        return companies_got
+    return _delete_companies
+
+@pytest.fixture(scope="function")
+def create_products():
+    def _create_products(products: List[str]):
+        product_service = ProductService()
+        products_created = []
+        for product in products:
+            product_created = product_service.create_product(
+                product.get("name"),
+                product.get("branch"),
+                product.get("description"),
+                product.get("tags"),
+            )
+            products_created.append(product_created)
+        return products_created
+    return _create_products
+
+@pytest.fixture(scope="function")
+def delete_products():
+    def _delete_products(products: List[str]):
+        product_service = ProductService()
+        products_deleted = []
+        for product in products:
+            product_deleted = product_service.delete_product_id(
+                product,
+            )
+            products_deleted.append(product_deleted)
+        return products_deleted
+    return _delete_products
 
 # @pytest.fixture(scope="session")
 # def db(app):

@@ -5,12 +5,12 @@ from app.database import DataBase
 from app.models import User
 from app.database import DataBase
 from app.services import ProductService, CompanyService, product_service
+from fastapi.testclient import TestClient
 EXAMPLE_NAME = "Example Name"
 EXAMPLE_BRANCH = "Example Branch"
 EXAMPLE_DESCRIPTION = "Example Description"
 EXAMPLE_TAGS = ["Example Tag", "Example Tag", "Example Tag"]
-EXAMPLE_COMP_NAME = "Example Company Name"
-def test_get_product(create_product):
+def test_get_product(app, create_product):
     db = DataBase()
     company_service = CompanyService()
     product_service = ProductService()
@@ -28,22 +28,20 @@ def test_get_product(create_product):
         '\n', 
         company_created
     )
-    # company_getter = company_service.get_company_name(EXAMPLE_BRANCH.lower())
-    # print('=============================after company getter===============================')
-    # print('\n\n\n', company_getter)
-    product_getter = ProductIdGetter()
-    product = product_getter.run(ProductId(
-        id = product_created.id,
-    ))
-    # user = db.session.query(User).filter(User.id==user_created.id).first()
-
-    print('============================')
-    print(
-        product,
-        '\n', 
-    )
-
-    assert product is not None
-    assert product.name == EXAMPLE_NAME
-    product_service.delete_product_id(product.id)
+    client = TestClient(app)
+    response = client.get(
+        "/product/id/{}".format(product_created.id),
+        json={
+            "id": product_created.id,
+        }
+    ).json()
+    print('==============response===================')
+    print(response) 
+    product = response.get('product')
+    # user = response.get('user')
+    assert response 
+    assert product.get('name') == EXAMPLE_NAME
+    product_service.delete_product_id(product_created.id)
     company_service.delete_company_id(company_created.id)
+
+    

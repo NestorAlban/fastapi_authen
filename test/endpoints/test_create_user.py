@@ -11,6 +11,7 @@ from fastapi.testclient import TestClient
 
 def test_create_user_endpoint(app):
     client = TestClient(app)
+    user_service = UserService()
     response = client.post(
         "/create_user",
         json={
@@ -20,7 +21,10 @@ def test_create_user_endpoint(app):
         }
 
     ).json()
-    print(response)  
+    print('==============response===================')
+    print(response) 
+    user = response.get('user')
     assert response  # db.session.delete(user)
-    assert response.get('name') == EXAMPLE_NAME
+    assert user.get('name') == EXAMPLE_NAME
+    user_service.delete_user_id(user.get('id'))
 

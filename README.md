@@ -34,7 +34,7 @@
         ´´´
     - Remove db data
         ```shell
-            sudo remove -r -f postgres-data
+            sudo rm -r -f postgres-data/
         ´´´
 
 create new virtualenv with pyenv

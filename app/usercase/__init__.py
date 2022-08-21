@@ -25,5 +25,6 @@ from .update_product_amount_usercase import ProductAmountUpdate
 from .get_product_id_usercase import ProductIdGetter
 ##Company
 from .create_company_usercase import CompanyCreator
+from .get_company_name_usercase import CompanyNameGetter
 ##Sell
 from .create_sell_usercase import SellCreator
