@@ -4,6 +4,7 @@ import os
 sys.path.append(os.getcwd())
 import uvicorn
 
+
 from app.endpoints.app import create_app
 from app.models.user import Base as B0
 from app.models.product import Base as B1
