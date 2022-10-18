@@ -20,6 +20,10 @@
     - Run image and server
         ```shell
         docker run -p 8000:8000 python-fast
+        ´´´ 
+    - Remove image
+        ```shell
+        docker image rm -f <image name>
         ´´´
 6. App Flow
     Folder database

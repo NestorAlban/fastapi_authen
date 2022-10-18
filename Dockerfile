@@ -4,22 +4,16 @@ WORKDIR /fastapi-app
 
 COPY README.md .
 
-COPY poetry.lock .
-
-COPY pyproject.toml .
-
 COPY requirements.txt .
 
-RUN python -m venv venv
+COPY .env .
 
-RUN source venv/Script/activate
-
-RUN pip install poetry
-
-RUN poetry install
+RUN pip install -r requirements.txt
 
 COPY ./app ./app
 
 COPY ./test ./test
+
+RUN pip --disable-pip-version-check list --format=freeze
 
 CMD ["python", "./app/main.py"]
