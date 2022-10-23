@@ -12,29 +12,33 @@
 #
 4. Install packages with poetry
 #
-5. Run Docker file
-    - Create image
-        ```shell
-        docker build -t python-fast .
-        ´´´
-    - Run image and server
-        ```shell
-        docker run -p 8000:8000 python-fast
-        ´´´ 
-    - Remove image
-        ```shell
-        docker image rm -f <image name>
-        ´´´
+5. .env data
+    Variables needed to configure in the environment .env file
+    - User is the user configured in the database administrator
+    - Password is the password configured in the database administrator
+    - Host is localhost by default, just use the service name if docker compose is used
+    - Port is 5432 or the configured port in the database administrator
+    - Name is the name of the server created
+
+
 6. App Flow
     Folder database
     Folder services
     Folder usercase
     Folder endpoints 
 
-7. Run Docker
+7. Docker
+    - Configure Docker-compose file
+            The host of the .env has to change from localhost or 8080 to sellsdb, 
+        the name of the service in the doc.com. file
+            Set the same network in the services that are going to be used
     - Create image
         ```shell
             sudo docker-compose up
+        ´´´
+    - Shutdown the image
+        ```shell
+            sudo docker-compose down
         ´´´
     - Remove db data
         ```shell

@@ -12,12 +12,12 @@ services:
       - POSTGRES_USER=postgres
       - POSTGRES_PASSWORD=postgres
       - POSTGRES_DB=sellsdb
-#   Maps port 54320 (localhost) to port 5432 on the container. You can change the ports to fix your needs.
+#   Maps port 5432 (localhost) to port 5432 on the container. You can change the ports to fix your needs.
     networks:
       - fastapi_network
     ports:
       - "5432:5432" 
-#   Exponer el puerto 5432 de la app al puerto 5438 de nuestro computador
+#   Exponer el puerto 5432 de la app al puerto 5432 de nuestro computador
 #   Set a volume some that database is not lost after shutting down the container.
 #   I used the name postgres-data but you can changed it to something else.
     volumes:
@@ -32,27 +32,9 @@ services:
       - fastapi_network
     ports:
       - "5000:5000"
-  # app:
-  #   container_name: fastapiapp
-    
-  #   build: .
-  #   ports:
-  #     - "5008:5000"
 networks:
   fastapi_network:
     driver: bridge
-  # web:
-  #   build: 
-  #     context: ./fastapi-app
-  #     dockerfile: Dockerfile
-  #   depends_on:
-  #     - sellsdb
-  #   ports:
-  #     - "8001:8001"
-  #   volumes:
-  #     - ./fastapi-app/app:/app
-  #   environment:
-  #     - DATABASE_URL=postgresql://postgres:password@sellsdb:5438/app
-  #     - BACKEND_CORS_ORIGINS=["http://localhost:3000", "http://localhost:8000"]
+
 
   
