@@ -39,8 +39,6 @@ def get_company_name(name: str = Path(
     try:
         company_name_getter = CompanyNameGetter()
         company = company_name_getter.run(CompanyName(name = name_lower))
-        print("============================4")
-        print(company, type(company))
         if company:
             company_name_response = [
                 CompanyData(**comp.__dict__) for comp in company

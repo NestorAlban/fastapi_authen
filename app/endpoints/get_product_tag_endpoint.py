@@ -38,16 +38,11 @@ def get_product_tag(tag: str = Path(
     tag_lower = tag
     try:
         product_tag_getter = ProductTagGetter()
-        print("============1-a=================")
         product_tag = product_tag_getter.run(ProductTag(tags = tag_lower))
-        print("============1-b=================")
-        print(product_tag, type(product_tag))
-        print("============1-c=================")
         if product_tag:
             product_tag_response = [
                 ProductData(**product.__dict__) for product in product_tag
             ]
-            print("============1-d=================")
     except Exception as error:
         logging.error(GET_PRODUCT_TAG_ERROR_MESSAGE, error)
     return {PRODUCT_KEY: product_tag_response}

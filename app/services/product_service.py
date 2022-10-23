@@ -50,8 +50,6 @@ class ProductService:
     ):
         products = []
         products = self.alchemy_db.get_product_id(id)
-        print("id============================2")
-        print(products, type(products))
         return products
 
     def get_product_name(
@@ -60,8 +58,6 @@ class ProductService:
     ):
         products = []
         products = self.alchemy_db.get_product_name(part_name)
-        print("============================2")
-        print(products, type(products))
         return products
 
     def get_product_tag(
@@ -69,11 +65,7 @@ class ProductService:
         part_tags: str
     ):
         products = []
-        print("============3-a=================")
         products = self.alchemy_db.get_product_tag(part_tags)
-        print("============3-b=================")
-        print(products, type(products))
-        print("============3-c=================")
         return products
 
     def get_product_branch(
@@ -82,8 +74,6 @@ class ProductService:
     ):
         products = []
         products = self.alchemy_db.get_product_branch(part_branch)
-        print("branch============================2")
-        print(products, type(products))
         return products
 
     def update_product_info(

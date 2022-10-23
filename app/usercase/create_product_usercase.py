@@ -18,5 +18,4 @@ class ProductCreator:
             params.description,
             params.tags
         )
-        print("==============success1============")
         return product

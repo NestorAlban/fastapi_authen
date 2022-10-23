@@ -38,8 +38,6 @@ def get_product_name(id: int = Path(
     try:
         product_id_getter = ProductIdGetter()
         product_id = product_id_getter.run(ProductId(id = id))
-        print("============================4")
-        print(product_id, type(product_id))
         if product_id:
             # product_response = ProductData(**product_id.__dict__)
             product_response = ProductData.construct(

@@ -15,5 +15,4 @@ class EnrollmentCreator:
             params.user,
             params.vendor,
         )
-        print("==============success1============")
         return enrollment

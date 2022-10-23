@@ -10,6 +10,4 @@ class ProductBranchGetter:
     def run(self, params: ProductBranch) -> Product:
         product_service = ProductService()
         product = product_service.get_product_branch(params.branch)
-        print("branch============================3")
-        print(product, type(product))
         return product

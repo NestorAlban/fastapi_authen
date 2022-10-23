@@ -40,21 +40,17 @@ def update_user_role(
 ):
     success = False
     user_response = None
-    print("=========================1")
     try:
-        print("=========================2")
         user_update = UserRoleUpdate()
         # role = new_user_data.role
         role = roles
         if type(role) == int and role < 4:
-            print("=========================3")
             users = user_update.run(UpdateUserRole(
                 id = ids, 
                 role = roles
             ))
 
             if users:
-                print("=========================4")
                 success = True
                 #if users_response used just replace the user_response with it in the response
                 users_response = UserCleanData(**users.__dict__)
@@ -68,18 +64,8 @@ def update_user_role(
                     created_at = users.created_at,
                     updated_at = users.updated_at,
                 ).dict(by_alias=True)
-                print("=========================",
-                    user_response, 
-                    user_response.get('role'), 
-                    type(user_response),
-                    "========================="
-                )
                 new_role = Mapping_rath.role_mapping(user_response.get('role'))
                 status_name = Mapping_rath.status_mapping(user_response.get('status'))
-                print("=========================",
-                    new_role,
-                    "========================="
-                )
                 user_response.update({'role': new_role})
                 user_response.update({'status': status_name})
         else:

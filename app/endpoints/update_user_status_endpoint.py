@@ -61,18 +61,8 @@ def update_user_status(
                     created_at = users.created_at,
                     updated_at = users.updated_at,
                 ).dict(by_alias=True)
-                print("=========================",
-                    user_response, 
-                    user_response.get('role'), 
-                    type(user_response),
-                    "========================="
-                )
                 new_status = Mapping_rath.status_mapping(user_response.get('status'))
                 role_name = Mapping_rath.role_mapping(user_response.get('role'))
-                print("=========================",
-                    new_status,
-                    "========================="
-                )
                 user_response.update({'role': role_name})
                 user_response.update({'status': new_status})
         else:

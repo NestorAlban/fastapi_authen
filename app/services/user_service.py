@@ -19,8 +19,6 @@ class UserService:
             name, 
             password
         )
-        print(user)
-        print("====================asd===========")
         return user
 
     def create_user(
@@ -34,7 +32,6 @@ class UserService:
             email, 
             password
         )
-        print("==============success2============")
         return user
     
     def delete_user_id(
@@ -65,10 +62,7 @@ class UserService:
         self, 
         email: str
     ):
-        print("Email>error ser 1")
         user = self.alchemy_db.change_user_password(email)
-        print(user)
-        print("Email>error ser 2")
         return user
         
     def update_user(

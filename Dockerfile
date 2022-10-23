@@ -16,4 +16,5 @@ COPY ./test ./test
 
 RUN pip --disable-pip-version-check list --format=freeze
 
-CMD ["python", "./app/main.py"]
+# CMD ["python", "./app/main.py"]
+CMD ["uvicorn", "app.main:app", "--host", "0.0.0.0", "--port", "5000"]

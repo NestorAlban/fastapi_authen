@@ -10,7 +10,5 @@ class ProductIdGetter:
     def run(self, params: ProductId) -> Product:
         product_service = ProductService()
         product = product_service.get_product_id(params.id)
-        print("============================3")
-        print(product, type(product))
         return product
     

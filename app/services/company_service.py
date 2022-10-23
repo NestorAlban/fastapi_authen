@@ -15,7 +15,6 @@ class CompanyService:
         company = self.alchemy_db.create_company(
             name,
         )
-        print("==============success2============")
         return company
 
     def delete_company_id(
@@ -31,6 +30,4 @@ class CompanyService:
     ):
         companies = []
         companies = self.alchemy_db.get_company_name(part_name)
-        print("==========companies==================2")
-        print(companies, type(companies))
         return companies

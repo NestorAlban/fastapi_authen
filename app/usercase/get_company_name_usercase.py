@@ -10,6 +10,4 @@ class CompanyNameGetter:
     def run(self, params: CompanyName) -> Branch:
         company_service = CompanyService()
         company = company_service.get_company_name(params.name)
-        print("============================3")
-        print(company, type(company))
         return company

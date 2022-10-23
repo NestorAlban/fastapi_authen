@@ -14,14 +14,10 @@ class LoginUser:
             params.name, 
             params.password
         )
-        print("============================1111111")
-        print(user)
         d = user.get('user')
         if d != None:
             login_user_response = UserCleanData(
                 **d.__dict__
             )
-            print(user.get('user'))
             print(login_user_response)
-            print("============================111111111111")
         return user

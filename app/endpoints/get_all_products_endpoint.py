@@ -29,8 +29,6 @@ def get_all_products():
     try:
         all_products_getter = AllProductGetter()
         products = all_products_getter.run()
-        print("============================1")
-        print(products, type(products))
         all_products_response = [ProductData(**product.__dict__) for product in products]
     except Exception as error:
         logging.error(GET_ALL_PRODUCTS_ERROR_MESSAGE, error)

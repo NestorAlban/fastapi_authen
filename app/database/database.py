@@ -184,9 +184,6 @@ class DataBase:
                 # user_domain = DataBase.create_user_domain(user)
 
                 user_domain = Domain.create_user_domain(user)
-                print("============================")
-                print(user_domain.id)
-                print("============================")
         except IntegrityError as e:
             assert isinstance(e.orig, UniqueViolation)
         self.session.close()
@@ -237,9 +234,6 @@ class DataBase:
             print(user)
             if user:
                 user_domain = Domain.create_user_domain(user)
-                print("=====================get_all_users1=======================")
-                print(user_domain, type(user_domain), user_domain.id)
-                print("=====================get_all_users1=======================")
         self.session.close()
         # user_response=[UserDomain(**user.__dict__) for user in users]
         # print(user_response)
@@ -271,7 +265,6 @@ class DataBase:
         if user:
             code = str(uuid.uuid1())
             user_domain=Domain.create_user_domain(user)
-            print(user_domain, type(user_domain), user_domain.id)
         self.session.close()
 
         #Sending Mail
@@ -363,16 +356,12 @@ class DataBase:
                 if vendor and vendor.status != role:
                     vendor.status = role
                 self.session.commit()
-                print("=====================vendor created==================")
             elif role == 0:
                 # vendor = self.session.query(Vendor).filter(Vendor.name == id).first()
                 if vendor.status != role:
                     vendor.status = role
                     self.session.commit()
-                print("=====================vendor deactivated==================")
             vendor_domain = Domain.create_vendor_domain(vendor)
-            print(vendor_domain.id)
-            print(f'================vendor status = {vendor_domain.status}==============')
         self.session.close()
         return user_domain
 
@@ -453,12 +442,6 @@ class DataBase:
                             self.session.add(enrollment)
                             self.session.commit()
                             enrollment_domain = Domain.create_enrollment_domain(enrollment)
-                        print(SPACES_FOR_MESSAGE)
-                        print(
-                            enrollment_domain.id, 
-                            enrollment_domain.user, 
-                            enrollment_domain.vendor
-                        )
                         print(
                             SPACES_FOR_MESSAGE +
                             f'user name {user_name}, vendor name {vendor_name}' +
@@ -524,9 +507,6 @@ class DataBase:
                             # can product the create_product_domain in this file or in domain file
                             # product_domain = DataBase.create_product_domain(product)
                             product_domain = Domain.create_product_domain(product)
-                            print("============================")
-                            print(product_domain.id)
-                            print("============================")
         except IntegrityError as e:
             print(e)
             assert isinstance(e.orig, UniqueViolation)
@@ -549,7 +529,6 @@ class DataBase:
                 product_domain = Domain.create_product_domain(product)
                 self.session.delete(product)
                 self.session.commit()
-                print("=============delete product===============")
                 print(product_domain)
         except IntegrityError as e:
             assert isinstance(e.orig, UniqueViolation)
@@ -562,9 +541,6 @@ class DataBase:
             print(product)
             if product:
                 product_domain = Domain.create_product_domain(product)
-                print("=====================get_all_products1=======================")
-                print(product_domain, type(product_domain), product_domain.id)
-                print("=====================get_all_products1=======================")
         self.session.close()
         return products
 
@@ -579,7 +555,6 @@ class DataBase:
         ).filter(
             Product.id == id
         ).first()
-        print("id============================1")
         if product:
             product_domain = Domain.create_product_domain(product)
         self.session.close()
@@ -595,8 +570,6 @@ class DataBase:
         ).filter(
             func.lower(Product.name).contains(part_name)
         )
-        print("============================1")
-        print(product, type(product))
         self.session.close()
         return product
 
@@ -606,21 +579,15 @@ class DataBase:
     ):
         #explicar al sql
         product = None
-        print("============4-a=================")
         product = self.session.query(
             Product
         ).filter(
             Product.tags.contains([part_tags])
         ).all()
-        print("============4-b=================")
         print(product, type(product))
         for prod in product:
             if prod:
-                print("============4-c=================")
                 product_domain = Domain.create_product_domain(prod)
-                print("=====================get_tag_products1=======================")
-                print(product_domain, type(product_domain), product_domain.id)
-                print("=====================get_tag_products1=======================")
         self.session.close()
         return product
 
@@ -635,7 +602,6 @@ class DataBase:
         ).filter(
             func.lower(Product.branch).contains(part_branch)
         )
-        print("branch============================1")
         print(product, type(product))
         for prod in product:
             print(prod)
@@ -701,9 +667,6 @@ class DataBase:
                 self.session.commit()
 
                 company_domain = Domain.create_company_domain(company)
-                print("============================")
-                print(company_domain.id)
-                print("============================")
         except IntegrityError as e:
             assert isinstance(e.orig, UniqueViolation)
         self.session.close()
@@ -744,10 +707,7 @@ class DataBase:
             )
             print(company)
             if company:
-                print("===========companies=================1")
                 company_domain = Domain.create_company_domain(company)
-                print(company_domain, type(company_domain))
-                
         except IntegrityError as e:
             assert isinstance(e.orig, UniqueViolation)
         self.session.close()
@@ -785,9 +745,6 @@ class DataBase:
                     self.session.add(sell)
                     self.session.commit()
                     sell_domain = Domain.create_sell_domain(sell)
-                    print("============================")
-                    print(sell_domain.id)
-                    print("============================")
         except IntegrityError as e:
             assert isinstance(e.orig, UniqueViolation)
         self.session.close()

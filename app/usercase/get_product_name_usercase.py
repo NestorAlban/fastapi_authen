@@ -10,7 +10,5 @@ class ProductNameGetter:
     def run(self, params: ProductName) -> Product:
         product_service = ProductService()
         product = product_service.get_product_name(params.name)
-        print("============================3")
-        print(product, type(product))
         return product
 

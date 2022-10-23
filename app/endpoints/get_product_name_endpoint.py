@@ -39,8 +39,6 @@ def get_product_name(name: str = Path(
     try:
         product_name_getter = ProductNameGetter()
         product_name = product_name_getter.run(ProductName(name = name_lower))
-        print("============================4")
-        print(product_name, type(product_name))
         if product_name:
             product_name_response = [
                 ProductData(**product.__dict__) for product in product_name

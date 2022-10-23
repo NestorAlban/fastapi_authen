@@ -26,7 +26,6 @@ class SellCreator:
                 params.user,
                 params.product,
             )
-        print("==============success1============")
         return {
             'sell':sell,
             'user': is_user_valid,

@@ -40,8 +40,6 @@ def get_product_branch(
     try:
         product_branch_getter = ProductBranchGetter()
         product_branch = product_branch_getter.run(ProductBranch(branch = branch_lower))
-        print("branch============================4")
-        print(product_branch, type(product_branch))
         if product_branch:
             product_branch_response = [
                 ProductData(**product.__dict__) for product in product_branch

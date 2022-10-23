@@ -19,6 +19,5 @@ class SellService:
             user, 
             product,
         )
-        print("==============success2============")
         return sell
         

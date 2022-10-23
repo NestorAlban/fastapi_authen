@@ -20,5 +20,4 @@ class EnrollmentService:
             user_id,
             vendor_id
         )
-        print(enrollment)
         return enrollment

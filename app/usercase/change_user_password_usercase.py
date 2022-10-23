@@ -10,8 +10,5 @@ class EmailUserGetter:
 
     def run(self, params: UserEmailDefault) -> User:
         user_service = UserService()
-        print("Email>error user 1")
         user = user_service.change_user_password(params.email)
-        print(user)
-        print("Email>error user 2")
         return user
