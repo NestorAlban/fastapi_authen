@@ -5,3 +5,8 @@ __pycache__/
 .env
 postgres-data/
 __pycache__
+page/src/background.js
+page/package.json
+page/package-lock.json
+app/database/origins.py
+node_modules/

@@ -1,6 +1,5 @@
 from app.endpoints import login_user_endpoint 
 
-
 from app.endpoints import (
     ##Users
     create_user_endpoint,

@@ -1,0 +1,134 @@
+/* General */
+
+:root {
+    --white: #FFFFFF;
+    --black: #000000;
+    --light-blue-moon: #6989b3;
+    --text-input-field: #F7F7F7;
+    --hospital-green: #ACD9B2;
+    --dragon-red: rgba(167, 5, 5, 0.808);
+    --starling: #bb7d43e3;
+    --pastel: #987d9965;
+    --h2f: 30px;
+    --af: 20px;
+    --md: 16px;
+    --lg: 18px;
+    --hn: 50px;
+}
+body {
+    margin: 0;
+    font-family: 'Quicksand', sans-serif;
+}
+
+.inactive {
+    display: none;
+}
+
+/* Sections */
+
+.container {
+    display: flex;
+    padding: 0 10px;
+    margin-left: auto;
+    margin-right: auto;
+    border-bottom: 2px solid var(--light-blue-moon);
+    align-items: baseline;
+}
+
+.section_header {
+    font-size: var(--h2f);
+    text-decoration: none;
+    color: var(--black);
+}
+.section_header_header_2 {
+    margin-left: 10px;
+    font-size: var(--h2f);
+    text-decoration: none;
+    color: var(--black);
+}
+.container a{
+    /* position: relative; */
+    color: var(--light-blue-moon);
+    margin-left: auto;
+    margin-right: 20px;
+    font-size: var(--af);
+    text-decoration: none;
+    color: var(--dragon-red);
+}
+
+/* Products in section 1*/
+/* .items_container {
+    display: grid;
+    grid-template-columns: repeat(auto-fill,240px);
+    gap: 40px;
+    place-content: center;
+    margin-top: 20px;
+    margin-left: auto;
+    margin-right: auto;
+} */
+
+.NewProducts-List {
+    overflow-x: scroll;
+    overflow-y: hidden;
+    white-space: nowrap;
+    height: 275px;
+    padding-left: 24px;
+    padding-bottom: 16px;
+}
+
+.item-container {
+    margin-bottom: 5%;
+    margin: auto;
+    margin-top: 2%;
+    padding: 0% 5%;
+    border: 2px solid var(--dragon-red);
+    /* width: 25%; */
+    height: 225px;
+    min-height: 225px;
+    max-height: 225px;
+    width: 150px;
+    min-width: 150px;
+    max-width: 150px;
+    display: inline-block;
+    margin-right: 8px;
+}
+
+.item-image {
+    display: flex;
+    justify-content: center;
+    margin-top: 5%;
+    margin-bottom: 5%;
+    background-color: var(--pastel);
+}
+
+.item-container .item-image img {
+    position: relative;
+    width: 90%;
+    margin: auto;
+    border-radius: 20px;
+    object-fit: cover;
+}
+
+.item-container .item-data {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 5px;
+}
+
+.item-container .item-data div a{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 10px;
+}
+
+.item-container .item-data div p{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 10px;
+}
+
+
+

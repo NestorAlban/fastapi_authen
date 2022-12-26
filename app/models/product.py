@@ -79,6 +79,10 @@ class Product(Base):
         'Branch',
         back_populates = 'product'
     )
+    # tags = relationship(
+    #     'Tags',
+    #     back_populates = 'product'
+    # )
 
 class Branch(Base):
     __tablename__ = "company"
@@ -112,3 +116,36 @@ class Branch(Base):
         'Product',
         back_populates = 'company'
     )
+
+# class Tags(Base):
+#     __tablename__ = "tags"
+
+#     id = Column(
+#         Integer, 
+#         primary_key = True
+#     )
+#     name = Column(
+#         String, 
+#         nullable = False, 
+#         unique = True
+#     )
+#     status = Column(
+#         Integer(), 
+#         default = 1, 
+#         nullable = False
+#     )
+#     created_at = Column(
+#         DateTime, 
+#         default = func.now(), 
+#         nullable = False
+#     )
+#     updated_at = Column(
+#         DateTime, 
+#         default = func.now(), 
+#         nullable = False, 
+#         onupdate = func.now()
+#     )
+#     product = relationship(
+#         'Product',
+#         back_populates = 'tags'
+#     )

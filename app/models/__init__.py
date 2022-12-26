@@ -5,7 +5,8 @@ from .user import (
 )
 from .product import (
     Product, 
-    Branch
+    Branch,
+    # Tags
 )
 from .sells import (
     Sells

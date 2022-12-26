@@ -45,6 +45,11 @@
             sudo rm -r -f postgres-data/
         ´´´
 
+8. Build up the Front-end
+    - Install node and start npm for the page folder.
+    - Create a origin.py file in database folder and put the links that want to use as for front-end, those like "http://localhost" or "http://localhost:8080", that will let those links to be accepted by FastAPI CORS.
+
+
 create new virtualenv with pyenv
 
 - pyenv virtualenv <python version> <folder/project name>

@@ -14,3 +14,10 @@ from .domain import (
 )
 from .mail import Mail
 from .mapping_strings import Mapping_rath
+from .origins import (
+    LIVE_SERVER, 
+    LIVE_SERVER_2, 
+    LIVE_SERVER_3, 
+    LOCAL_HOST, 
+    LOCAL_HOST2
+)

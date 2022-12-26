@@ -23,7 +23,8 @@ from app.models import (
     User, 
     Product,
     Branch,
-    Sells
+    Sells,
+    # Tags
 )
 
 from typing import Final
@@ -706,12 +707,31 @@ class DataBase:
                 func.lower(Branch.name).contains(part_name)
             )
             print(company)
-            if company:
-                company_domain = Domain.create_company_domain(company)
         except IntegrityError as e:
             assert isinstance(e.orig, UniqueViolation)
         self.session.close()
-        return company_domain
+        return company
+
+    ##Tags (to add)
+
+    # def create_tag(
+    #     self, 
+    #     name: str, 
+    # ):
+    #     tag_domain = None
+    #     tag = Tags(
+    #         name = name, 
+    #     )
+    #     try:
+    #         if tag:
+    #             self.session.add(tag)
+    #             self.session.commit()
+
+    #             #tag_domain = Domain.create_tag_domain(tag)
+    #     except IntegrityError as e:
+    #         assert isinstance(e.orig, UniqueViolation)
+    #     self.session.close()
+    #     return tag_domain
 
     ##Sells
 
