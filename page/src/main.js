@@ -1,4 +1,17 @@
+// import axios from "axios";
+// const { default: axios } = require("axios");
 
+const api_ax = axios.create({
+    baseURL: MAIN_PATH,
+    headers: {
+        'Content-Type': 'application/json;'
+    },
+    // params: {
+    //     'api-key': API_KEY
+    // } //If have an API-KEY
+});
+
+/* 
 const btn0 = document.querySelector('#btn0');
 const btn1 = document.querySelector('#btn1');
 const btn2 = document.querySelector('#btn2');
@@ -10,40 +23,119 @@ const btn7 = document.querySelector('#btn7');
 const btn8 = document.querySelector('#btn8');
 const btn9 = document.querySelector('#btn9');
 const btn10 = document.querySelector('#btn10');
+*/
+
 
 const inp_ID = document.querySelector('#number_1');
 const inp_Nombre = document.querySelector('#number_2');
 const inp_Correo = document.querySelector('#number_3');
 const inp_Contra = document.querySelector('#number_4');
 const inp_RS = document.querySelector('#number_5');
-/*
-const userId = inp_ID.value;
-const userNombre = inp_Nombre.value;
-const userCorreo = inp_Correo.value;
-const userContra = inp_Contra.value;
-const userRS = inp_RS.value;
-*/
 
+
+const newProductsContainer = document.querySelector(".NewProducts-List .items_container");
+const bestSellersContainer = document.querySelector(".BestSellers-List .items_container");
+
+/*
 btn0.addEventListener('click', createNewUserPrev);
 btn1.addEventListener('click', getAllUsersPrev);
 btn5.addEventListener('click', getUserIdPrev);
 btn6.addEventListener('click', activateUserPrev);
 btn7.addEventListener('click', deactivateUserPrev);
-btn8.addEventListener('click', updateUserPrev);
+btn8.addEventListener('click', updateUserPrev);*/
+
 // btnsubs.addEventListener('click', btn_subs);
 // btnmulti.addEventListener('click', btn_multi);
 // btndiv.addEventListener('click', btn_div);
 
 
-
 async function getProductsPrev() {
     // const response = await fetch(`${MAIN_PATH}${PRODUCTS}${GET_PROD}`);
+    const {data} = await api_ax(GET_PROD);
     const response1 = await fetch(`${MAIN_PATH}${GET_PROD}`);
-    const data = await response1.json();
+    const data_res = await response1.json();
 
-    const products = data
+    const products = data_res
 
-    console.log({products})
+    products.forEach(product => {
+        const productContainer = document.createElement('div');
+        productContainer.classList.add('item-container');
+
+        const productImageCont = document.createElement('div');
+        productImageCont.classList.add('item-image');
+        const productImage = document.createElement('img');
+        productImage.classList.add('product-image');
+        productImage.setAttribute('alt', product.name);
+        productImage.setAttribute(
+            'src', 
+            './src/images/karin.png'
+        );
+        
+        const productData = document.createElement('div');
+        productData.classList.add('item-data');
+        const productDataSub = document.createElement('div');
+        const productNameSub = document.createElement('a');
+        productNameSub.innerText = product.name;
+        const productPriceSub = document.createElement('p');
+        productPriceSub.innerText = `S/ ${product.amount}`;
+
+        productDataSub.appendChild(productNameSub)
+        productDataSub.appendChild(productPriceSub)
+        productData.appendChild(productDataSub)
+        productImageCont.appendChild(productImage)
+        productContainer.appendChild(productImageCont)
+        productContainer.appendChild(productData)
+        newProductsContainer.appendChild(productContainer)
+
+
+        
+    })
+
+    console.log({data})
+} 
+
+async function getBestSellersPrev() {
+    // const response = await fetch(`${MAIN_PATH}${PRODUCTS}${GET_PROD}`);
+    const bestSellerPath = 'best%20seller';
+    const pathBestSell = PRODUCT_GEN+PRODUCT_TAG+bestSellerPath;
+    const {data} = await api_ax(pathBestSell);
+    const response1 = await fetch(`${MAIN_PATH}${GET_PROD}`);
+    const data_res = await response1.json();
+
+    const products = data.product
+
+    products.forEach(product => {
+        const productContainer = document.createElement('div');
+        productContainer.classList.add('item-container');
+
+        const productImageCont = document.createElement('div');
+        productImageCont.classList.add('item-image');
+        const productImage = document.createElement('img');
+        productImage.classList.add('product-image');
+        productImage.setAttribute('alt', product.name);
+        productImage.setAttribute(
+            'src', 
+            './src/images/karin.png'
+        );
+        
+        const productData = document.createElement('div');
+        productData.classList.add('item-data');
+        const productDataSub = document.createElement('div');
+        const productNameSub = document.createElement('a');
+        productNameSub.innerText = product.name;
+        const productPriceSub = document.createElement('p');
+        productPriceSub.innerText = `S/ ${product.amount}`;
+
+        productDataSub.appendChild(productNameSub)
+        productDataSub.appendChild(productPriceSub)
+        productData.appendChild(productDataSub)
+        productImageCont.appendChild(productImage)
+        productContainer.appendChild(productImageCont)
+        productContainer.appendChild(productData)
+        bestSellersContainer.appendChild(productContainer)
+    })
+    
+    
 } 
 
 async function getAllUsersPrev() {
@@ -83,7 +175,6 @@ async function createNewUserPrev() {
     console.log({users})
 } 
 
-//unauthorized
 async function getUserIdPrev() {
     // const response = await fetch(`${MAIN_PATH}${PRODUCTS}${GET_PROD}`);
 
@@ -180,5 +271,3 @@ async function deactivateUserPrev() {
 
     console.log({users})
 } 
-
-getProductsPrev()

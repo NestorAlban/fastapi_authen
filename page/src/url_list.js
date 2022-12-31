@@ -7,3 +7,5 @@ const CREATE_USER = "create_user"
 const GET_USER_C = "user/c/"
 const USER_GEN = "user/"
 const UPDATE_USER = "update_user"
+const PRODUCT_GEN = 'product'
+const PRODUCT_TAG = '/ta/'

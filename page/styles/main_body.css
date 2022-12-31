@@ -9,9 +9,13 @@
     --dragon-red: rgba(167, 5, 5, 0.808);
     --starling: #bb7d43e3;
     --pastel: #987d9965;
+    --butterfly-blue: #1EB8EC;
+    --tendy-pink: #925DA3;
+    --cranberry: #D54E8D;
     --h2f: 30px;
-    --af: 20px;
+    --af: 12px;
     --md: 16px;
+    --mmd: 14px;
     --lg: 18px;
     --hn: 50px;
 }
@@ -54,6 +58,16 @@ body {
     font-size: var(--af);
     text-decoration: none;
     color: var(--dragon-red);
+    border: 2px solid var(--dragon-red);
+    /* background-image: radial-gradient(
+        var(--cranberry) 25%, 
+        var(--tendy-pink) 35%, 
+        var(--butterfly-blue) 40%
+    ); */
+    background-color: var(--butterfly-blue);
+    color: var(--dragon-red);
+    padding: 6px;
+    border-radius: 15px;
 }
 
 /* Products in section 1*/
@@ -67,7 +81,7 @@ body {
     margin-right: auto;
 } */
 
-.NewProducts-List {
+.NewProducts-List, .BestSellers-List {
     overflow-x: scroll;
     overflow-y: hidden;
     white-space: nowrap;

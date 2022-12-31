@@ -10,3 +10,4 @@ page/package.json
 page/package-lock.json
 app/database/origins.py
 node_modules/
+package-lock.json

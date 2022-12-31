@@ -1,0 +1,32 @@
+{
+  "name": "fastapi_authen",
+  "version": "1.0.0",
+  "description": "1. Run fastapi\r     - Run with uvicorn\r         ```shell\r         python -m uvicorn app.main:app --reload\r         ```\r 2. Save requirements.txt\r     ```shell\r     pip --disable-pip-version-check list --format=freeze >requirements.txt\r     ´´´\r 3. Install packages with pip\r #\r 4. Install packages with poetry\r #\r 5. .env data\r     Variables needed to configure in the environment .env file\r     - User is the user configured in the database administrator\r     - Password is the password configured in the database administrator\r     - Host is localhost by default, just use the service name if docker compose is used\r     - Port is 5432 or the configured port in the database administrator\r     - Name is the name of the server created",
+  "main": "index.html",
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "eject": "react-scripts eject"
+  },
+  "proxy": "http://localhost:8000",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/NestorAlban/fastapi_authen.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/NestorAlban/fastapi_authen/issues"
+  },
+  "homepage": "https://github.com/NestorAlban/fastapi_authen#readme",
+  "dependencies": {
+    "axios": "^1.2.1",
+    "concurrently": "^7.6.0",
+    "cors": "^2.8.5",
+    "nodemon": "^2.0.20"
+  }
+}
