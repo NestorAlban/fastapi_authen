@@ -13,7 +13,8 @@ function loadHTML(id, filename) {
                 if (this.status == 404) {element.innerHTML = "<h1>Not found</h1>";}
             }
         }
-        xhttp.open("GET", `HTMLtemplates/${file}`, true);
+        // xhttp.open("GET", `HTMLtemplates/${file}`, true);
+        xhttp.open("GET", `${file}`, true);
         xhttp.send();
         return;
     }

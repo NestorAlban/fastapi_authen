@@ -1,7 +1,7 @@
 
 function homePage() {
     console.log('Home')
-    // loadHTML("main-nav", "main-nav.html");
+    loadHTML("main-nav", "main-nav.html");
 
     newProductSection.classList.remove('inactive');
     bestSellerSection.classList.remove('inactive');
@@ -9,7 +9,7 @@ function homePage() {
     newProductsArticleContainer.classList.remove('inactive');
     BestProductsArticleContainer.classList.remove('inactive');
 
-    createNavBarDesk();
+    // createNavBarDesk();
     
     getProductsPrev();
     getBestSellersPrev();
