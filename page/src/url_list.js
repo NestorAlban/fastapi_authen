@@ -1,4 +1,5 @@
 const MAIN_PATH = "http://127.0.0.1:8000/"
+const PATH_NAME = 'page/'
 const PRODUCTS = "Products/"
 const GET_PROD = "all_products"
 const GET_USERS = "all_users"

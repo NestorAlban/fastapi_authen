@@ -11,6 +11,9 @@ const api_ax = axios.create({
     // } //If have an API-KEY
 });
 
+const mainNavBar = document.querySelector('#main-nav');
+const mainPageBody = document.querySelector('#main-body');
+
 /* 
 const btn0 = document.querySelector('#btn0');
 const btn1 = document.querySelector('#btn1');
@@ -75,6 +78,7 @@ async function getProductsPrev() {
         productData.classList.add('item-data');
         const productDataSub = document.createElement('div');
         const productNameSub = document.createElement('a');
+        productNameSub.setAttribute('href', `page/products/${product.name}`);
         productNameSub.innerText = product.name;
         const productPriceSub = document.createElement('p');
         productPriceSub.innerText = `S/ ${product.amount}`;
@@ -122,6 +126,7 @@ async function getBestSellersPrev() {
         productData.classList.add('item-data');
         const productDataSub = document.createElement('div');
         const productNameSub = document.createElement('a');
+        productNameSub.setAttribute('href', '');
         productNameSub.innerText = product.name;
         const productPriceSub = document.createElement('p');
         productPriceSub.innerText = `S/ ${product.amount}`;
