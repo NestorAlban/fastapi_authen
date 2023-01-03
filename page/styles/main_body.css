@@ -91,10 +91,10 @@ body {
 }
 
 .item-container {
-    margin-bottom: 5%;
     margin: auto;
     margin-top: 2%;
-    padding: 0% 5%;
+    margin-bottom: 1%;
+    padding: 0% 2%;
     border: 2px solid var(--dragon-red);
     /* width: 25%; */
     height: 225px;
@@ -112,36 +112,79 @@ body {
     justify-content: center;
     margin-top: 5%;
     margin-bottom: 5%;
-    background-color: var(--pastel);
+    /* background-color: var(--pastel); */
 }
 
 .item-container .item-image img {
     position: relative;
     width: 90%;
+    /* position: absolute;
+    width: 10%; */
     margin: auto;
     border-radius: 20px;
     object-fit: cover;
 }
 
 .item-container .item-data {
-    display: flex;
+    display: inline;
     justify-content: space-between;
-    align-items: center;
+    grid-template-rows: auto auto;
+    align-items: right;
+    align-content: right;
+    /* align-items: center; */
+    /* margin-top: 50%; */
     margin-top: 5px;
+}
+
+.item-container .item-data div {
+    grid-template-rows: auto auto;
+    align-self: right;
+    align-content: right;
+    /* align-items: center; */
+    /* margin-top: 50%; */
 }
 
 .item-container .item-data div a{
     display: flex;
     justify-content: space-between;
+    color: var(--light-blue-moon);
+    text-decoration: none;
     align-items: center;
+    font-size: var(--md);
     margin-top: 10px;
 }
+
+.item-container .item-data div a:hover{
+    display: inline;
+    justify-content: space-between;
+    color: var(--light-blue-moon);
+    text-decoration: none;
+    align-items: center;
+    font-size: var(--lg);
+    margin-top: 10px;
+}
+
 
 .item-container .item-data div p{
     display: flex;
     justify-content: space-between;
-    align-items: center;
+    right: 0;
+    /* text-align: right; */
     margin-top: 10px;
+}
+
+.item-container .item-data .add-products {
+    color: var(--light-blue-moon);
+    margin-left: auto;
+    /* margin-right: 20px; */
+    font-size: var(--mmd);
+    color: var(--dragon-red);
+    border: 2px solid var(--dragon-red);
+    background-color: var(--butterfly-blue);
+    color: var(--dragon-red);
+    padding: 8px;
+    border-radius: 10px;
+    cursor: pointer;
 }
 
 

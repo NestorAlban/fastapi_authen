@@ -83,16 +83,19 @@ async function getProductsPrev() {
         const productPriceSub = document.createElement('p');
         productPriceSub.innerText = `S/ ${product.amount}`;
 
+        const addItemButton = document.createElement('button');
+        addItemButton.classList.add('add-products');
+        addItemButton.innerText = `Add`;
+
+
         productDataSub.appendChild(productNameSub)
         productDataSub.appendChild(productPriceSub)
         productData.appendChild(productDataSub)
+        productData.appendChild(addItemButton)
         productImageCont.appendChild(productImage)
         productContainer.appendChild(productImageCont)
         productContainer.appendChild(productData)
         newProductsContainer.appendChild(productContainer)
-
-
-        
     })
 
     console.log({data})
@@ -126,14 +129,20 @@ async function getBestSellersPrev() {
         productData.classList.add('item-data');
         const productDataSub = document.createElement('div');
         const productNameSub = document.createElement('a');
-        productNameSub.setAttribute('href', '');
+        productNameSub.setAttribute('href', `page/products/${product.name}`);
         productNameSub.innerText = product.name;
         const productPriceSub = document.createElement('p');
         productPriceSub.innerText = `S/ ${product.amount}`;
 
+        const addItemButton = document.createElement('button');
+        addItemButton.classList.add('add-products');
+        addItemButton.innerText = `Add`;
+
+
         productDataSub.appendChild(productNameSub)
         productDataSub.appendChild(productPriceSub)
         productData.appendChild(productDataSub)
+        productData.appendChild(addItemButton)
         productImageCont.appendChild(productImage)
         productContainer.appendChild(productImageCont)
         productContainer.appendChild(productData)

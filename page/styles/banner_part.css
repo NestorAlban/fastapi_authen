@@ -368,6 +368,8 @@ nav {
 #user-cart .cart-cont .cart-item p:nth-child(1),
 #user-cart .cart-cont .cart-item p:nth-child(2) {
     font-size: var(--md);
+    text-align: justify;
+    text-justify: inter-word;
     width: 30%;
     font-weight: 60px;
 }
